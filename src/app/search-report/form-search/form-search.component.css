@@ -1,0 +1,11 @@
+#checkBoxDate{
+    margin-inline-start: 13%;
+    /* align-items: flex-end; */
+    color: blue;
+}
+
+.my-wide-btn {
+    width:300px;
+    padding:5px;
+    color: blue;
+}
