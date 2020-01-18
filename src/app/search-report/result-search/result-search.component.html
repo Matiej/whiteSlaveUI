@@ -1,5 +1,166 @@
-<ul>
-    <li *ngFor = "let searchReport of searchResultList">
-        WYNIK na szybko: {{searchReport.requestId}}
-    </li>
-</ul>
+<div class="container" id="searchTable" *ngIf="searchReport.requestId != null">
+
+    <Div id="searchTable-ok">
+        <table>
+            <thead>
+                <th>Identyfikator wyszukiwania:</th>
+                <th><i>{{searchReport.requestId}}</i></th>
+            </thead>
+            <tbody *ngFor="let sub of searchReport.subjectDtoList">
+                <tr>
+                    <td class="tleft">Firma (nazwa) lub imię i nazwisko</td>
+                    <td class="tright">{{sub.name}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">Numer, za pomocą którego podmiot został zidentyfikowany na potrzeby podatku,
+                        jeżeli taki numer został przyznany</td>
+                    <td class="tright">{{sub.nip}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">Status podatnika (wg stanu na dzień sprawdzenia)</td>
+                    <td class="tright">{{sub.statusVat}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">Numer identyfikacyjny REGON, o ile został nadany</td>
+                    <td class="tright">{{sub.regon | emptyValue}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">Numer PESEL, o ile podmiot posiada</td>
+                    <td class="tright">{{sub.pesel | emptyValue}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">Numer w Krajowym Rejestrze Sądowym, o ile został nadany</td>
+                    <td class="tright">{{sub.krs |emptyValue}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">Adres stałego miejsca prowadzenia działalności albo adres miejsca zamieszkania, w
+                        przypadku braku adresu stałego miejsca prowadzenia działalności - w odniesieniu do osoby
+                        fizycznej</td>
+                    <td class="tright">{{sub.residenceAddress |emptyValue}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">Adres siedziby – w przypadku podmiotu niebędącego osobą fizyczną</td>
+                    <td class="tright">{{sub.workingAddress | emptyValue}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">Imiona i nazwiska osób wchodzących w skład organu uprawnionego do reprezentowania
+                        podmiotu oraz ich numery identyfikacji podatkowej lub numery PESEL</td>
+                    <td class="tright">
+                        <div *ngIf="sub.partnersDtoList.length > 1 ; else empty">
+                            <ul *ngFor="let repr of sub.representativesDtoList">
+                                <li>Nazwa firmy - {{repr.companyName}}</li>
+                                <li>Imie - {{repr.firstName}}</li>
+                                <li>Nazwisko - {{repr.lastName}}</li>
+                                <li>NIP - {{repr.nip}}</li>
+                                <li>PESEL - {{repr.pesel}}</li>
+                            </ul>
+                        </div>
+                        <ng-template #empty>
+                            <p>------</p>
+                        </ng-template>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tleft">Imiona i nazwiska prokurentów oraz ich numery identyfikacji podatkowej lub numery
+                        PESEL</td>
+                    <td class="tright">
+                        <div *ngIf="sub.partnersDtoList.length > 1 ; else empty">
+                            <ul *ngFor="let clerk of sub.authorizedClerksDtoList">
+                                <li>Nazwa firmy - {{clerk.companyName}}</li>
+                                <li>Imie - {{clerk.firstName}}</li>
+                                <li>Nazwisko - {{clerk.lastName}}</li>
+                                <li>NIP - {{clerk.nip}}</li>
+                                <li>PESEL - {{clerk.pesel}}</li>
+                            </ul>
+                        </div>
+                        <ng-template #empty>
+                            <p>------</p>
+                        </ng-template>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td class="tleft">Imię i nazwisko lub firma (nazwa) wspólnika oraz jego numer identyfikacji
+                        podatkowej lub numer PESEL</td>
+                    <td class="tright">
+                        <div *ngIf="sub.partnersDtoList.length > 1 ; else empty">
+                            <ul *ngFor="let partner of sub.partnersDtoList">
+                                <li>Nazwa firmy - {{partner.companyName}}</li>
+                                <li>Imie - {{partner.firstName}}</li>
+                                <li>Nazwisko - {{partner.lastName}}</li>
+                                <li>NIP - {{partner.nip}}</li>
+                                <li>PESEL - {{partner.pesel}}</li>
+                            </ul>
+                        </div>
+                        <ng-template #empty>
+                            <p>------</p>
+                        </ng-template>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tleft">Posiada wirtualne konto</td>
+                    <td class="tright">{{sub.hasVirtualAccounts | virtualAccount}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">Numery rachunków rozliczeniowych lub imiennych rachunków w SKOK</td>
+                    <td class="tright">
+                        <div *ngIf="sub.accountNumbersList.length > 1 ; else empty">
+                            <ng-container *ngFor="let repr of sub.accountNumbersList">
+                                <p>{{repr}}</p>
+                            </ng-container>
+                        </div>
+                        <ng-template #empty>
+                            <p>------</p>
+                        </ng-template>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tleft">Data rejestracji VAT</td>
+                    <td class="tright">{{sub.registrationLegalDate | emptyValue}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">
+                        <div>
+                            <span style="display: block;">Data odmowy rejestracji VAT</span>
+                            <span style="display: block;">Podstawa prawna odmowy rejestracji</span>
+                        </div>
+                    </td>
+                    <td class="tright">
+                        <span style="display: block;">{{sub.registrationDenialDate | emptyValue}}</span>
+                        <span style="display: block;">{{sub.registrationDenialBasis | emptyValue}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tleft">
+                        <div>
+                            <span style="display: block;">Data wykreślenia rejestracji jako podatnika VAT</span>
+                            <span style="display: block;">Podstawa prawna wykreślenia</span>
+                        </div>
+                    </td>
+                    <td class="tright">
+                        <div>
+                            <span style="display: block;">{{sub.removalDate | emptyValue}}</span>
+                            <span style="display: block;">{{sub.removalBasis | emptyValue}}</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tleft">
+                        <div>
+                            <span style="display: block;">Data przywrócenia rejestracji jako podatnika VAT</span>
+                            <span style="display: block;">Podstawa prawna przywróceni </span>
+                        </div>
+                    </td>
+                    <td class="tright">
+                        <div>
+                            <span style="display: block;">{{sub.restorationDate | emptyValue}}</span>
+                            <span style="display: block;">{{sub.restorationBasis | emptyValue}}</span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </Div>
+    <br>
+
+</div>

@@ -7,11 +7,11 @@
             </a>
             <a mat-list-item routerLink="searchreport" role="button" routerLinkActive="active">
 
-                <span class="label">RAPOT DOKŁADNY</span>
+                <span class="label">SEARCH REPORT</span>
             </a>
             <a mat-list-item routerLink="searchreport" role="button" routerLinkActive="active">
 
-                <span class="label">SPRAWDZENIE</span>
+                <span class="label">CHECK REPORT</span>
             </a>
 
             <a mat-button target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/matiej/">
@@ -32,71 +32,47 @@
             </div>
 
             <span class="menu-spacer">
-                <a routerLink="home" role="button">
-                    <img src="/assets/logo.png" size="10%" alt="logo">
-                </a>
+                
             </span>
 
             <div fxShow="true" fxHide.xs>
                 <ul fxLayout layout-align="start-center" class="navigation-items">
-                    <li>
-                        <a routerLink="home" role="button" mat-button>
+                    <li routerLinkActive="active">
+                        <a routerLink="/" role="button" routerLinkActive="active" mat-button>
                             <mat-icon class="icon">home</mat-icon>
-                            <span class="label">ARCHIMAT</span>
+                            <span class="label">HOME</span>
                         </a>
                     </li>
                     <li routerLinkActive="active">
                         <a routerLink="searchreport" role="button" routerLinkActive="active" mat-button>
-
-                            <span class="label">DOKŁADNY RAPORT</span>
+                            <!-- <mat-icon class="icon">home</mat-icon> -->
+                            <span class="label">SEARCH REPORT</span>
                         </a>
                     </li>
                     <li routerLinkActive="active">
-                        <a routerLink="checkreport" role="button" routerLinkActive="active" mat-button>
-
-                            <span class="label">SPRAWDZENIE</span>
+                        <a routerLink="searchreport" role="button" routerLinkActive="active" mat-button>
+                            <!-- <mat-icon class="icon">home</mat-icon> -->
+                            <span class="label">CHECK REPORT</span>
                         </a>
                     </li>
-                    <li>
-                        <a routerLink="userComponent" role="button" routerLinkActive="active" mat-button>
-                            <span class="label" [matMenuTriggerFor]="user">ARCHIWUM
-                                <mat-icon class="icon">arrow_drop_down</mat-icon></span>
-                        </a>
-                        <mat-menu #user="matMenu">
-                            <a routerLink="" role="button" routerLinkActive="active" mat-list-item><a mat-button>
-                                    <mat-icon class="icon">format_list_bulleted</mat-icon>
-                                    <span class="label">RAPORTY</span>
-                                </a>
-                            </a>
-                            <a routerLink="" role="button" routerLinkActive="active" mat-list-item><a mat-button>
-                                    <mat-icon class="icon">list</mat-icon>
-                                    <span class="label">ZAPYTANIA</span>
-                                </a>
-                            </a>
-                        </mat-menu>
-                    </li>
-                    <li>
-                        <a routerLink="logut" role="button" routerLinkActive="active" mat-button>
-
-                            <span class="label">WYLOGUJ</span>
-                        </a>
-                    </li>
-                    <span class="menu-spacer-in"></span>
-                    <li routerLink="active">
+                    <span class="menu-spacer" ></span> 
+                     <li>
                         <a mat-button target="_blank" rel="noopener noreferrer"
                             href="https://www.linkedin.com/in/matiej/">
                             <mat-icon class="icon"><img src="/assets/linkedin.png" alt="linkedid" /></mat-icon>
                         </a>
+                    </li>
+                    <li>
                         <a mat-button target="_blank" rel="noopener noreferrer" href="https://github.com/Matiej">
                             <mat-icon class="icon"><img src="/assets/github-box.png" alt="github" /></mat-icon>
                         </a>
-                    </li>
+                    </li> 
                 </ul>
             </div>
         </mat-toolbar>
-        <!-- <router-outlet></router-outlet> -->
-        <main style="position: relative; top: 65px; ">
-            <router-outlet></router-outlet>
-        </main>
+        <router-outlet></router-outlet>
+        <!-- <main style="position: relative; top: 65px; "> -->
+            <!-- <router-outlet></router-outlet> -->
+        <!-- </main> -->
     </mat-sidenav-content>
 </mat-sidenav-container>

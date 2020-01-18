@@ -5,7 +5,10 @@
 }
 
 .my-wide-btn {
-    width:300px;
-    padding:5px;
-    color: blue;
+    width: 500px;
+    height: 40px;
+    /* padding-top: 13px; */
+    font-size: large;
+    text-shadow: 2px 2px #3d3c3c;
+    color: white;
 }

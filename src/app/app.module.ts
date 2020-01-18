@@ -12,20 +12,141 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { AlertModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule,NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePipe } from '@angular/common';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { EmptyValuePipe } from './shared/empty-value.pipe';
+import { ReportListPipe } from './shared/report-list.pipe';
+import { VirtualAccountPipe } from './shared/virtual-account.pipe';
+import { HomeComponent } from './home/home.component';
+
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { MatIconModule } from "@angular/material/icon";
+import {
+  MatButtonModule,
+  MatFormFieldModule,
+  MatAutocompleteModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatStepperModule
+} from "@angular/material";
+import { Page404Component } from './page404/page404.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchReportComponent,
     ResultSearchComponent,
-    FormSearchComponent
+    FormSearchComponent,
+    EmptyValuePipe,
+    ReportListPipe,
+    VirtualAccountPipe,
+    HomeComponent,
+    Page404Component,
+
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BsDatepickerModule.forRoot(), AlertModule.forRoot(),
-    BrowserAnimationsModule,NoopAnimationsModule
+    BrowserAnimationsModule,NoopAnimationsModule,
+    HttpClientModule,
+
+    FlexLayoutModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatStepperModule
+
+  ],
+  exports: [
+    BrowserAnimationsModule,
+    NoopAnimationsModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatStepperModule
   ],
   providers: [SearchService, DatePipe],
   bootstrap: [AppComponent]

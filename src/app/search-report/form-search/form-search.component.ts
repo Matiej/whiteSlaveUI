@@ -1,3 +1,4 @@
+import { SearchReport } from 'src/app/model/searchreport';
 import { SearchService } from './../../service/search.service';
 import { Component, OnInit } from '@angular/core';
 import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
@@ -8,17 +9,18 @@ import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 })
 export class FormSearchComponent implements OnInit {
 
-  readonly colorTheme: string = 'theme-dark-blue';
-  readonly dateFormat: string = 'YYYY-MM-DD';
+  private readonly colorTheme: string = 'theme-dark-blue';
+  private readonly dateFormat: string = 'YYYY-MM-DD';
+  private readonly NIP = 'opt1';
+  private readonly REGON = 'opt2';
+  private readonly BANKACCOUNT = 'opt3';
   bsConfig: Partial<BsDatepickerConfig>;
 
-  nipSelected: boolean;
-  regonSelected: boolean;
-  bankAccountSelected: boolean;
   isSearchValueInputDisable: boolean = true;
   searchValueInputMaxLength: number = 33;
   searchValueInputMinLength: number = 0;
   inputSearchValuePlacholder: string = 'Wpisz wartość';
+  inputValueOption: string = '';
   inputSearchValue: string = '';
 
   isDateValueInputDisable: boolean = true;
@@ -35,22 +37,24 @@ export class FormSearchComponent implements OnInit {
   }
 
   clickRadio(event: any) {
+    this.clearSearchFields();
     this.isSearchValueInputDisable = false;
     this.inputSearchValue = '';
+    this.inputValueOption = event.target.id;
     switch (event.target.id) {
-      case 'opt1': {
+      case this.NIP: {
         this.inputSearchValuePlacholder = "Wpisz numer NIP";
         this.searchValueInputMaxLength = 10;
         this.searchValueInputMinLength = 10;
         break;
       }
-      case 'opt2': {
+      case this.REGON: {
         this.inputSearchValuePlacholder = "Wpisz numer REGON";
         this.searchValueInputMaxLength = 14;
         this.searchValueInputMinLength = 9;
         break;
       }
-      case 'opt3': {
+      case this.BANKACCOUNT: {
         this.inputSearchValuePlacholder = "Wpisz numer konta bankowego";
         this.searchValueInputMaxLength = 32;
         this.searchValueInputMinLength = 32;
@@ -62,6 +66,7 @@ export class FormSearchComponent implements OnInit {
         this.searchValueInputMinLength = 32;
       }
     }
+    this.clearResult();
   }
 
   inputSearchValueField(event) {
@@ -69,8 +74,8 @@ export class FormSearchComponent implements OnInit {
   }
 
   onFocusInputSearchFiled() {
-    this.inputSearchValue ='';
-    this.inputSearchValuePlacholder ='';
+    this.inputSearchValue = '';
+    this.inputSearchValuePlacholder = '';
   }
 
   onFocusInputInvoice() {
@@ -78,6 +83,7 @@ export class FormSearchComponent implements OnInit {
   }
 
   enableDateInput() {
+    this.clearResult();
     this.isDateValueInputDisable = !this.isDateValueInputDisable;
     if (this.isDateValueInputDisable) {
       this.inputDateValue = new Date();
@@ -88,9 +94,54 @@ export class FormSearchComponent implements OnInit {
     return this.inputSearchValue.length == 0;
   }
 
-  public searchByBankAccoutAndDate() {
-    this.searchService.searchByBankAccountAndDate(this.inputSearchValue, this.inputDateValue, this.inputInvoice);
-    this.clearAfterSearchButton();
+  public search() {
+    switch (this.inputValueOption) {
+      case this.NIP: {
+        this.serachByNipAndDate();
+        break;
+      }
+      case this.REGON: {
+        this.searchByRegonAndDate()
+        break;
+      }
+      case this.BANKACCOUNT: {
+        this.searchByBankAccoutAndDate()
+        break;
+      }
+      default: {
+        console.log('ERRORR!!');
+      }
+    }
+  }
+
+  public clearResult() {
+    this.searchService.clearSearchReport();
+  }
+
+
+  private serachByNipAndDate() {
+    this.searchService.seachByNipAndDate(this.inputSearchValue, this.inputDateValue, this.inputInvoice).subscribe(searchReportResult => {
+      this.showAndSendSearchReport(searchReportResult);
+    });
+  }
+
+  private searchByRegonAndDate() {
+    this.searchService.searchByRegonAndDate(this.inputSearchValue, this.inputDateValue, this.inputInvoice).subscribe(searchReportResult => {
+      this.showAndSendSearchReport(searchReportResult);
+    });
+
+  }
+
+  private searchByBankAccoutAndDate() {
+    this.searchService.searchByBankAccountAndDate(this.inputSearchValue, this.inputDateValue, this.inputInvoice).subscribe(searchReportResult => {
+      this.showAndSendSearchReport(searchReportResult);
+    });
+
+  }
+
+  private showAndSendSearchReport(searchReport: SearchReport): void {
+    this.searchService.showAndSendSearchReport(searchReport);
+
   }
 
   private bsConfigParams() {
@@ -99,10 +150,8 @@ export class FormSearchComponent implements OnInit {
       { maxDate: new Date() });
   }
 
-  private clearAfterSearchButton() {
-    this.nipSelected = false;
-    this.regonSelected = false;
-    this.bankAccountSelected = false;
+  private clearSearchFields() {
+
     this.inputSearchValue = 'Wpisz wartość';
     this.isSearchValueInputDisable = true;
 
@@ -114,5 +163,6 @@ export class FormSearchComponent implements OnInit {
 
     this.isDateValueInputDisable = true;
   }
+
 
 }

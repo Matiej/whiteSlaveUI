@@ -9,19 +9,21 @@ import { SearchReport } from 'src/app/model/searchreport';
 })
 export class ResultSearchComponent implements OnInit {
 
-  searchResultList: Array<SearchReport> = [];
+  searchReport: SearchReport;
 
   constructor(private searchService: SearchService) {
-    this. getSearchReportListObs();
-   }
+    this.getSearchReportListObs();
+  }
 
   ngOnInit() {
   }
 
   private getSearchReportListObs(): void {
-    this.searchService.getSearchReportListObs().subscribe((searchReportList: Array<SearchReport>) => {
-      this.searchResultList = searchReportList;
+    this.searchService.getSearchReportListObs().subscribe(search => {
+      this.searchReport = search;
+      console.log(search.requestId);
     });
+
   }
 
 
