@@ -1,3 +1,4 @@
+import { ArchiveService } from './service/archive.service';
 import { SearchService } from './service/search.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -54,6 +55,7 @@ import {
   MatStepperModule
 } from "@angular/material";
 import { Page404Component } from './page404/page404.component';
+import { ArchCheckReponseReportComponent } from './arch-check-reponse-report/arch-check-reponse-report.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import { Page404Component } from './page404/page404.component';
     VirtualAccountPipe,
     HomeComponent,
     Page404Component,
+    ArchCheckReponseReportComponent,
 
 
   ],
@@ -148,7 +151,8 @@ import { Page404Component } from './page404/page404.component';
     MatTooltipModule,
     MatStepperModule
   ],
-  providers: [SearchService, DatePipe],
+  providers: [SearchService, ArchiveService,
+    DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
