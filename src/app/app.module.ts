@@ -56,6 +56,10 @@ import {
 } from "@angular/material";
 import { Page404Component } from './page404/page404.component';
 import { ArchCheckReponseReportComponent } from './arch-check-reponse-report/arch-check-reponse-report.component';
+import { ArchCheckDetailsComponent } from './arch-check-reponse-report/arch-check-details/arch-check-details.component';
+import { ArchCheckReponseListComponent } from './arch-check-reponse-report/arch-check-reponse-list/arch-check-reponse-list.component';
+import { YesNoDirective } from './shared/yes-no.directive';
+import { LineLightDirective } from './shared/line-light.directive';
 
 @NgModule({
   declarations: [
@@ -69,6 +73,10 @@ import { ArchCheckReponseReportComponent } from './arch-check-reponse-report/arc
     HomeComponent,
     Page404Component,
     ArchCheckReponseReportComponent,
+    ArchCheckDetailsComponent,
+    ArchCheckReponseListComponent,
+    YesNoDirective,
+    LineLightDirective,
 
 
   ],

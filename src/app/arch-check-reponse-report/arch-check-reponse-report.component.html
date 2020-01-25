@@ -1,8 +1,6 @@
-<div style="margin-left: 10%;">
-    <ul >
-        <li *ngFor = "let archChechResponse of archCheckResponseReports; let i = index">
-             ID: {{i}}, ID_ODPOWIDZI: {{archChechResponse.requestId}}, CZY ZWERYFIKOWANY: {{archChechResponse.accountAssigned}}
-              <button>DETALE</button>
-        </li>
-    </ul>
+<div>
+   <div class="container">
+      <app-arch-check-reponse-list></app-arch-check-reponse-list>
+      <router-outlet></router-outlet>    
+   </div>
 </div>

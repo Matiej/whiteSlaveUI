@@ -9,15 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArchCheckReponseReportComponent implements OnInit {
 
-  archCheckResponseReports: Array<ArchResponseReport>;
-
-  constructor(private archService: ArchiveService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.archService.getArchReponseReports()
-    .subscribe((archCheckResponseReportList: Array<ArchResponseReport>)=> {
-      this.archCheckResponseReports = archCheckResponseReportList;
-    })
+
   }
 
 

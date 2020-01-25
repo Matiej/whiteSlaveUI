@@ -40,24 +40,24 @@
             <div fxShow="true" fxHide.xs>
                 <ul fxLayout layout-align="start-center" class="navigation-items">
                     <li>
-                        <a routerLink="home" role="button" mat-button>
+                        <a routerLink="/home" role="button" mat-button>
                             <mat-icon class="icon">home</mat-icon>
-                            <span class="label">ARCHIMAT</span>
+                            <!-- <span class="label">ARCHIMAT</span> -->
                         </a>
                     </li>
-                    <li>
-                        <a role="button" routerLinkActive="active" mat-button>
+                    <li  routerLinkActive="active">
+                        <a role="button" mat-button>
                             <span class="label" [matMenuTriggerFor]="whiteList">BIAŁA LISTA VAT
                                 <mat-icon class="icon">arrow_drop_down</mat-icon></span>
                         </a>
                         <mat-menu #whiteList="matMenu">
-                            <a routerLink="searchreport" role="button" routerLinkActive="active" mat-list-item>
+                            <a routerLink="/searchreport" role="button" routerLinkActive="active" mat-list-item>
                                 <a mat-button>
                                     <mat-icon class="icon">format_list_bulleted</mat-icon>
                                     <span class="label">RAPORT SZCZEGÓŁOWY</span>
                                 </a>
                             </a>
-                            <a routerLink="checkreport" role="button" routerLinkActive="active" mat-list-item><a
+                            <a routerLink="/checkreport" role="button" routerLinkActive="active" mat-list-item><a
                                     mat-button>
                                     <mat-icon class="icon">list</mat-icon>
                                     <span class="label">WERYFIKACJA</span>
@@ -66,23 +66,23 @@
                         </mat-menu>
                     </li>
 
-                    <li>
+                    <li routerLinkActive="active">
                         <a role="button" mat-button>
                             <span class="label" [matMenuTriggerFor]="arch">ARCHIWUM
                                 <mat-icon class="icon">arrow_drop_down</mat-icon></span>
                         </a>
                         <mat-menu #arch="matMenu">
-                            <a routerLink="archSearchReports" role="button" routerLinkActive="active" mat-list-item><a mat-button>
+                            <a routerLink="/archSearchReports" role="button" routerLinkActive="active" mat-list-item><a mat-button>
                                     <mat-icon class="icon">format_list_bulleted</mat-icon>
                                     <span class="label">RAPORTY SZCZEGÓŁOWE</span>
                                 </a>
                             </a>
-                            <a routerLink="archCheckReports" role="button" routerLinkActive="active" mat-list-item><a mat-button>
+                            <a routerLink="/archCheckReports" role="button" routerLinkActive="active" mat-list-item><a mat-button>
                                     <mat-icon class="icon">format_list_bulleted</mat-icon>
                                     <span class="label">RAPORTY WERYFIKACJI</span>
                                 </a>
                             </a>
-                            <a routerLink="requests" role="button" routerLinkActive="active" mat-list-item><a
+                            <a routerLink="/requests" role="button" routerLinkActive="active" mat-list-item><a
                                     mat-button>
                                     <mat-icon class="icon">list</mat-icon>
                                     <span class="label">ZAPYTANIA</span>
@@ -91,7 +91,7 @@
                         </mat-menu>
                     </li>
                     <li>
-                        <a routerLink="logut" role="button" routerLinkActive="active" mat-button>
+                        <a routerLink="/logut" role="button" routerLinkActive="active" mat-button>
 
                             <span class="label">WYLOGUJ</span>
                         </a>
@@ -110,7 +110,7 @@
             </div>
         </mat-toolbar>
         <!-- <router-outlet></router-outlet> -->
-        <main style="position: relative; top: 65px; ">
+        <main style="position: relative; top: 35px; ">
             <router-outlet></router-outlet>
         </main>
     </mat-sidenav-content>

@@ -2,8 +2,8 @@
 export class ArchReportSyncRequest {
 
     private _id: number;
-    private _requestDate: Date;
-    private _reportDate: Date;
+    private _requestDate: string;
+    private _reportDate: string;
     private _pdfFileName: string;
     private _searchResult: string;
     private _reportType: string;
@@ -21,9 +21,9 @@ export class ArchReportSyncRequest {
 
     /**
      * Getter requestDate
-     * @return {Date}
+     * @return {string}
      */
-	public get requestDate(): Date {
+	public get requestDate(): string {
 		return this._requestDate;
 	}
 
@@ -31,7 +31,7 @@ export class ArchReportSyncRequest {
      * Getter reportDate
      * @return {Date}
      */
-	public get reportDate(): Date {
+	public get reportDate(): string {
 		return this._reportDate;
 	}
 
@@ -95,7 +95,7 @@ export class ArchReportSyncRequest {
      * Setter requestDate
      * @param {Date} value
      */
-	public set requestDate(value: Date) {
+	public set requestDate(value: string) {
 		this._requestDate = value;
 	}
 
@@ -103,7 +103,7 @@ export class ArchReportSyncRequest {
      * Setter reportDate
      * @param {Date} value
      */
-	public set reportDate(value: Date) {
+	public set reportDate(value: string) {
 		this._reportDate = value;
 	}
 

@@ -5,7 +5,14 @@ export class ArchResponseReport {
     private _id: number;
     private _requestId: string;
     private _accountAssigned: string;
-    private _archRerpotSyncRequest: ArchReportSyncRequest;
+    private _requestDate: string;
+    private _reportDate: string;
+    private _pdfFileName: string;
+    private _searchResult: string;
+    private _reportType: string;
+    private _requestNip: string;
+    private _requestRegon: string;
+    private _requestBankAccount: string;
 
 
     /**
@@ -56,21 +63,135 @@ export class ArchResponseReport {
 		this._accountAssigned = value;
     }
     
+
     /**
-     * Getter archRerpotSyncRequest
-     * @return {ArchReportSyncRequest}
+     * Getter requestDate
+     * @return {string}
      */
-	public get archRerpotSyncRequest(): ArchReportSyncRequest {
-		return this._archRerpotSyncRequest;
+	public get requestDate(): string {
+		return this._requestDate;
 	}
 
     /**
-     * Setter archRerpotSyncRequest
-     * @param {ArchReportSyncRequest} value
+     * Getter reportDate
+     * @return {string}
      */
-	public set archRerpotSyncRequest(value: ArchReportSyncRequest) {
-		this._archRerpotSyncRequest = value;
+	public get reportDate(): string {
+		return this._reportDate;
 	}
+
+    /**
+     * Getter pdfFileName
+     * @return {string}
+     */
+	public get pdfFileName(): string {
+		return this._pdfFileName;
+	}
+
+    /**
+     * Getter searchResult
+     * @return {string}
+     */
+	public get searchResult(): string {
+		return this._searchResult;
+	}
+
+    /**
+     * Getter reportType
+     * @return {string}
+     */
+	public get reportType(): string {
+		return this._reportType;
+	}
+
+    /**
+     * Getter requestNip
+     * @return {string}
+     */
+	public get requestNip(): string {
+		return this._requestNip;
+	}
+
+    /**
+     * Getter requestRegon
+     * @return {string}
+     */
+	public get requestRegon(): string {
+		return this._requestRegon;
+	}
+
+    /**
+     * Getter requestBankAccount
+     * @return {string}
+     */
+	public get requestBankAccount(): string {
+		return this._requestBankAccount;
+	}
+
+    /**
+     * Setter requestDate
+     * @param {string} value
+     */
+	public set requestDate(value: string) {
+		this._requestDate = value;
+	}
+
+    /**
+     * Setter reportDate
+     * @param {string} value
+     */
+	public set reportDate(value: string) {
+		this._reportDate = value;
+	}
+
+    /**
+     * Setter pdfFileName
+     * @param {string} value
+     */
+	public set pdfFileName(value: string) {
+		this._pdfFileName = value;
+	}
+
+    /**
+     * Setter searchResult
+     * @param {string} value
+     */
+	public set searchResult(value: string) {
+		this._searchResult = value;
+	}
+
+    /**
+     * Setter reportType
+     * @param {string} value
+     */
+	public set reportType(value: string) {
+		this._reportType = value;
+	}
+
+    /**
+     * Setter requestNip
+     * @param {string} value
+     */
+	public set requestNip(value: string) {
+		this._requestNip = value;
+	}
+
+    /**
+     * Setter requestRegon
+     * @param {string} value
+     */
+	public set requestRegon(value: string) {
+		this._requestRegon = value;
+	}
+
+    /**
+     * Setter requestBankAccount
+     * @param {string} value
+     */
+	public set requestBankAccount(value: string) {
+		this._requestBankAccount = value;
+	}
+
 
 
 }
