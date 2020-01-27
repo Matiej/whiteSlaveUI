@@ -60,6 +60,7 @@ import { ArchCheckDetailsComponent } from './arch-check-reponse-report/arch-chec
 import { ArchCheckReponseListComponent } from './arch-check-reponse-report/arch-check-reponse-list/arch-check-reponse-list.component';
 import { YesNoDirective } from './shared/yes-no.directive';
 import { LineLightDirective } from './shared/line-light.directive';
+import { ReportTypeAndResultTranslPipe } from './shared/report-type-and-result-transl.pipe';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { LineLightDirective } from './shared/line-light.directive';
     ArchCheckReponseListComponent,
     YesNoDirective,
     LineLightDirective,
+    ReportTypeAndResultTranslPipe,
 
 
   ],

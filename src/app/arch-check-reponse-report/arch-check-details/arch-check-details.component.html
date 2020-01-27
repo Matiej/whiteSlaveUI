@@ -1,8 +1,8 @@
 <div style="margin-left: 3%; margin-right: 3;" id="archCheckDetailsTable">
-<div class="szadows">
-    <h3>DETALE RAPORTU WERYFIKACYJNEGO</h3>
-    <br>
-</div>
+    <div class="szadows">
+        <h3>DETALE RAPORTU WERYFIKACYJNEGO</h3>
+        <br>
+    </div>
 
     <table>
         <thead>
@@ -23,16 +23,16 @@
                 <td class="tright">{{archReportRequest.requestDate}}</td>
             </tr>
             <tr>
-                <td class="tleft">Raport PDF</td>
+                <td class="tleft">Raport w pliku PDF</td>
                 <td><button>Pobierz PDF</button></td>
             </tr>
             <tr>
-                <td class="tleft">Typ raport</td>
-                <td class="tright">{{archReportRequest.reportType | emptyValue}}</td>
+                <td class="tleft">Typ raportu</td>
+                <td class="tright">{{archReportRequest.reportType | emptyValue | reportTypeAndResultTransl}}</td>
             </tr>
             <tr>
                 <td class="tleft">Rezultat wyszukania</td>
-                <td class="tright">{{archReportRequest.searchResult | emptyValue}}</td>
+                <td class="tright">{{archReportRequest.searchResult | emptyValue | reportTypeAndResultTransl}}</td>
             </tr>
             <tr>
                 <td class="tleft">NIP zapytania</td>
@@ -47,6 +47,6 @@
                 <td class="tright">{{archReportRequest.requestBankAccount | emptyValue}}</td>
             </tr>
         </tbody>
-        <button routerLink="/archCheckReports">ZAMKNIJ</button> 
+        <button routerLink="/archCheckReports">ZAMKNIJ</button>
     </table>
 </div>

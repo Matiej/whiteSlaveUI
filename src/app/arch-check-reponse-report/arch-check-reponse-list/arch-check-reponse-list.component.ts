@@ -46,19 +46,20 @@ export class ArchCheckReponseListComponent implements OnInit, AfterViewInit {
   constructor(private archService: ArchiveService) { }
 
   ngOnInit() {
-    this.archService.getArchReponseReports()
+      this.archService.findAllSyncCheckReports()
       .subscribe((archCheckResponseReportList: Array<ArchResponseReport>) => {
+        console.log('sssiize:  ' + archCheckResponseReportList.length);
         this.archCheckResponseReports = archCheckResponseReportList;
         this.dataSource = new MatTableDataSource(this.archCheckResponseReports);
-      })
+      });
   }
 
   ngAfterViewInit(): void {
-    this.archService.getArchReponseReports()
+       this.archService.findAllSyncCheckReports()
       .subscribe((archCheckResponseReportList: Array<ArchResponseReport>) => {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-      })
+      });
   }
 
   createDisplayedColumns(): Array<string> {
@@ -68,7 +69,7 @@ export class ArchCheckReponseListComponent implements OnInit, AfterViewInit {
     displayedCol.push('accountAssigned');
     displayedCol.push('requestDate')
     displayedCol.push('requestNip')
-     return displayedCol;
+    return displayedCol;
   }
 
   applyFilter(filterValue: string) {

@@ -118,7 +118,7 @@ export class FormSearchComponent implements OnInit {
     this.searchService.clearSearchReport();
   }
 
-
+//todo wywalić metodę showAndSearchReport() bezpośrednio ładować do listy. Głupi kurwa pomysł. 
   private serachByNipAndDate() {
     this.searchService.seachByNipAndDate(this.inputSearchValue, this.inputDateValue, this.inputInvoice).subscribe(searchReportResult => {
       this.showAndSendSearchReport(searchReportResult);
