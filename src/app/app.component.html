@@ -42,10 +42,10 @@
                     <li>
                         <a routerLink="/home" role="button" mat-button>
                             <mat-icon class="icon">home</mat-icon>
-                            <!-- <span class="label">ARCHIMAT</span> -->
+                            <span class="label">START</span>
                         </a>
                     </li>
-                    <li  routerLinkActive="active">
+                    <li routerLinkActive="active">
                         <a role="button" mat-button>
                             <span class="label" [matMenuTriggerFor]="whiteList">BIAŁA LISTA VAT
                                 <mat-icon class="icon">arrow_drop_down</mat-icon></span>
@@ -72,12 +72,14 @@
                                 <mat-icon class="icon">arrow_drop_down</mat-icon></span>
                         </a>
                         <mat-menu #arch="matMenu">
-                            <a routerLink="/archSearchReports" role="button" routerLinkActive="active" mat-list-item><a mat-button>
+                            <a routerLink="/archsearchreports" role="button" routerLinkActive="active" mat-list-item><a
+                                    mat-button>
                                     <mat-icon class="icon">format_list_bulleted</mat-icon>
                                     <span class="label">RAPORTY SZCZEGÓŁOWE</span>
                                 </a>
                             </a>
-                            <a routerLink="/archCheckReports" role="button" routerLinkActive="active" mat-list-item><a mat-button>
+                            <a routerLink="/archcheckreports" role="button" routerLinkActive="active" mat-list-item><a
+                                    mat-button>
                                     <mat-icon class="icon">format_list_bulleted</mat-icon>
                                     <span class="label">RAPORTY WERYFIKACJI</span>
                                 </a>

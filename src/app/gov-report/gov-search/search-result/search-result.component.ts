@@ -1,13 +1,13 @@
-import { SearchService } from './../../service/search.service';
 import { Component, OnInit } from '@angular/core';
 import { SearchReport } from 'src/app/model/searchreport';
+import { SearchService } from 'src/app/service/search.service';
 
 @Component({
-  selector: 'app-result-search',
-  templateUrl: './result-search.component.html',
-  styleUrls: ['./result-search.component.css']
+  selector: 'app-search-result',
+  templateUrl: './search-result.component.html',
+  styleUrls: ['./search-result.component.css']
 })
-export class ResultSearchComponent implements OnInit {
+export class SearchResultComponent implements OnInit {
 
   searchReport: SearchReport;
 
@@ -25,7 +25,4 @@ export class ResultSearchComponent implements OnInit {
     });
 
   }
-
-
-
 }

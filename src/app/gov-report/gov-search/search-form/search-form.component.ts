@@ -1,13 +1,15 @@
-import { SearchReport } from 'src/app/model/searchreport';
-import { SearchService } from './../../service/search.service';
 import { Component, OnInit } from '@angular/core';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
+import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { SearchService } from 'src/app/service/search.service';
+import { SearchReport } from 'src/app/model/searchreport';
+
 @Component({
-  selector: 'app-form-search',
-  templateUrl: './form-search.component.html',
-  styleUrls: ['./form-search.component.css']
+  selector: 'app-search-form',
+  templateUrl: './search-form.component.html',
+  styleUrls: ['./search-form.component.css']
 })
-export class FormSearchComponent implements OnInit {
+export class SearchFormComponent implements OnInit {
+
 
   private readonly colorTheme: string = 'theme-dark-blue';
   private readonly dateFormat: string = 'YYYY-MM-DD';
@@ -118,7 +120,7 @@ export class FormSearchComponent implements OnInit {
     this.searchService.clearSearchReport();
   }
 
-//todo wywalić metodę showAndSearchReport() bezpośrednio ładować do listy. Głupi kurwa pomysł. 
+  //todo wywalić metodę showAndSearchReport() bezpośrednio ładować do listy. Głupi kurwa pomysł. 
   private serachByNipAndDate() {
     this.searchService.seachByNipAndDate(this.inputSearchValue, this.inputDateValue, this.inputInvoice).subscribe(searchReportResult => {
       this.showAndSendSearchReport(searchReportResult);
@@ -133,7 +135,8 @@ export class FormSearchComponent implements OnInit {
   }
 
   private searchByBankAccoutAndDate() {
-    this.searchService.searchByBankAccountAndDate(this.inputSearchValue, this.inputDateValue, this.inputInvoice).subscribe(searchReportResult => {
+    this.searchService.searchByBankAccountAndDate(this.inputSearchValue, this.inputDateValue, this.inputInvoice)
+    .subscribe(searchReportResult => {
       this.showAndSendSearchReport(searchReportResult);
     });
 
@@ -163,6 +166,4 @@ export class FormSearchComponent implements OnInit {
 
     this.isDateValueInputDisable = true;
   }
-
-
 }

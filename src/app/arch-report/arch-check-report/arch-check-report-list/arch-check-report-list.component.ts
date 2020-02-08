@@ -1,25 +1,13 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ArchResponseReport } from 'src/app/model/archResponseReport';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ArchiveService } from 'src/app/service/archive.service';
-import { MatTableDataSource, MatPaginator, MatSort } from "@angular/material";
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  AfterViewInit
-} from "@angular/core";
-import {
-  trigger,
-  state,
-  transition,
-  animate,
-  style
-} from "@angular/animations";
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
-  selector: 'app-arch-check-reponse-list',
-  templateUrl: './arch-check-reponse-list.component.html',
-  styleUrls: ['./arch-check-reponse-list.component.css'],
-
+  selector: 'app-arch-check-report-list',
+  templateUrl: './arch-check-report-list.component.html',
+  styleUrls: ['./arch-check-report-list.component.css'],
   animations: [
     trigger("detailExpand", [
       state(
@@ -31,7 +19,7 @@ import {
     ])
   ]
 })
-export class ArchCheckReponseListComponent implements OnInit, AfterViewInit {
+export class ArchCheckReportListComponent implements OnInit {
 
   archCheckResponseReports: Array<ArchResponseReport>;
 
@@ -46,7 +34,7 @@ export class ArchCheckReponseListComponent implements OnInit, AfterViewInit {
   constructor(private archService: ArchiveService) { }
 
   ngOnInit() {
-      this.archService.findAllSyncCheckReports()
+    this.archService.findAllSyncCheckReports()
       .subscribe((archCheckResponseReportList: Array<ArchResponseReport>) => {
         console.log('sssiize:  ' + archCheckResponseReportList.length);
         this.archCheckResponseReports = archCheckResponseReportList;
@@ -55,7 +43,7 @@ export class ArchCheckReponseListComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-       this.archService.findAllSyncCheckReports()
+    this.archService.findAllSyncCheckReports()
       .subscribe((archCheckResponseReportList: Array<ArchResponseReport>) => {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
@@ -77,6 +65,5 @@ export class ArchCheckReponseListComponent implements OnInit, AfterViewInit {
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
   }
-
 
 }

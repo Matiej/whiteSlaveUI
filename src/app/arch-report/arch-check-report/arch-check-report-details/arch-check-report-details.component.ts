@@ -1,15 +1,14 @@
-import { ArchResponseReport } from './../../model/archResponseReport';
-import { ArchiveService } from './../../service/archive.service';
-import { ArchReportSyncRequest } from './../../model/archReportSyncRequest';
 import { Component, OnInit } from '@angular/core';
+import { ArchResponseReport } from 'src/app/model/archResponseReport';
+import { ArchiveService } from 'src/app/service/archive.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
-  selector: 'app-arch-check-details',
-  templateUrl: './arch-check-details.component.html',
-  styleUrls: ['./arch-check-details.component.css']
+  selector: 'app-arch-check-report-details',
+  templateUrl: './arch-check-report-details.component.html',
+  styleUrls: ['./arch-check-report-details.component.css']
 })
-export class ArchCheckDetailsComponent implements OnInit {
+export class ArchCheckReportDetailsComponent implements OnInit {
 
   archReportRequest: ArchResponseReport = new ArchResponseReport();
  
@@ -23,5 +22,6 @@ export class ArchCheckDetailsComponent implements OnInit {
         });
     });
   }
+
 
 }

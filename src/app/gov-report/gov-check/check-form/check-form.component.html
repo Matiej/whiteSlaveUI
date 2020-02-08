@@ -1,0 +1,70 @@
+<div class="container">
+    <br>
+    <div class="form-row ">
+        <div class="form-group col-md-6 mb-3 pb-3 input-group-lg">
+            <div class="form-check-inline">
+                <label class="form-check-label" for="c-opt1">
+                    <input type="radio" class="form-check-input" name="optradio" id="c-opt1"
+                        (input)="clickRadio($event)">NIP
+                </label>
+            </div>
+            <div class="form-check-inline">
+
+                <label for="c-opt2" class="form-check-label">
+                    <input type="radio" class="form-check-input" name="optradio" id="c-opt2"
+                        (input)="clickRadio($event)">REGON
+                </label>
+
+            </div>
+
+            <br>
+            <input type="text" class="form-control" [placeholder]="inputCheckValuePlaceholder"
+                [maxLength]="checkValueInputMaxLength" [disabled]="isCheckValueInputDisable" autocomplete="off"
+                (focus)="onFocusInputCheckFiled()" [(ngModel)]="inputCheckValue">
+        </div>
+        <div class="form-row ">
+
+            <div id="checkBankAccountForm" class="form-group col-md-6 mb-3 pb-3 input-group-lg">
+                <div lass="form-check-inline">
+                    <label for="inputBankAccount" class="form-check-label">Konto bankowe(Bez prefixu kraju)
+                    </label>
+                </div>
+                <input id="inputBankAccount" type="text" class="form-control" [placeholder]="inputBankValuePlaceholder"
+                    [maxLength]="bankInputLength" [disabled]="isCheckValueInputDisable" autocomplete="off"
+                    (focus)="onFocusInputBankField()" [(ngModel)]="checkFormParams.bankaAccount">
+            </div>
+
+            <div id="checkDateFrom" class="form-group col-ms-5 mb-3 pb-3 input-group-lg">
+                <div lass="form-check-inline">
+                    <label for="inputDateValue" class="form-check-label">Wyszukaj dane na dzień:
+                        {{checkFormParams.date | date: 'yyyy-MM-dd'}}</label>
+                </div>
+                <input type="text" class="form-control" id="inputDateValue" name="inputDateValue" autocomplete="off"
+                    [disabled]="isDateValueInputDisable" bsDatepicker [bsConfig]="bsConfig"
+                    [(ngModel)]="checkFormParams.date">
+                <div class="form-check-inline" style="padding-inline-start: 30%; margin-left: 25%; margin-right: 5%;">
+                    <label class="form-check-label" for="checkBoxDate">
+                        <input type="checkbox" class="form-check-input" (click)="enableDateInput()"
+                            [(ngModel)]="dateCheckboxSelected">
+                        Zmień datę</label>
+                </div>
+            </div>
+
+            <div id="inputInvoiceForm" class="form-group col-ms-5 mb-3 ml-1 pb-3 input-group-lg">
+                <div class="form-check-inline">
+                    <label for="inputInvoice" class="form-check-label">Numer dokumentu(Opcjonalne)
+                    </label>
+                </div>
+                <input type="text" class="form-control" id="inputInvoice" name="inputInvoice" autocomplete="off"
+                    [placeholder]="inputInvoiceValuePlaceholder" [(ngModel)]="checkFormParams.invoice"
+                    (focus)="onFocusInputInvoice()">
+            </div>
+        </div>
+        <br>
+        <div style="text-align: center;">
+            <button type="button" class="my-wide-btn" mat-raised-button color="accent" (click)="search()"
+                [disabled]="enableSearchButton()">SZUKAJ</button>
+        </div>
+        <br>
+
+    </div>

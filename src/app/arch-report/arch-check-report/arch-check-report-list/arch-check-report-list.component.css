@@ -1,0 +1,67 @@
+
+.filter-header {
+    min-height: 64px;
+    margin-right: 50%;
+    margin-left: 10%;
+    padding: 8px 24px 0;
+  }
+  
+  .mat-form-field {
+    font-size: 12px;
+    width: 100%;
+  }
+  
+  .table-container {
+    margin-right: 25px;
+    margin-left: auto; 
+    /* margin-right: ; */
+    display: block;
+    flex-direction: column;
+    min-width: 700px;
+    text-align: center;
+    
+  }
+  
+  .mat-header-cell {
+    font-size: 14px;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    
+    text-decoration: underline;
+    color: rgb(199, 202, 216);
+    border: 1px solid grey;
+  }
+  
+  .mat-cell {
+    border: 1px solid gray;
+    color: white;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    font-size: 11px;
+    }
+  
+  .mat-table {
+    overflow: auto;
+    color: white;
+    max-height: 650px;
+    background-color: transparent;
+    text-align: center;
+  }
+  
+  .element-row {
+    position: relative;
+  }
+  
+  .element-row:not(.expanded) {
+    cursor: pointer;
+  }
+  /* child components */
+  /* .element-row:not(.expanded):hover {
+    background: #249607;
+  } */
+  
+  .element-row.expanded {
+    border-bottom-color: transparent;
+  }

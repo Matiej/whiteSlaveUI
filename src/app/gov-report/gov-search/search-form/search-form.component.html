@@ -4,22 +4,22 @@
         <div class="form-group col-md-6 mb-3 pb-3 input-group-lg">
             <div class="form-check-inline">
                 <label class="form-check-label" for="opt1">
-                    <input type="radio" class="form-check-input" name="optradio" id="opt1" (input)="clickRadio($event)"
-                        >NIP
+                    <input type="radio" class="form-check-input" name="optradio" id="opt1"
+                        (input)="clickRadio($event)">NIP
                 </label>
             </div>
             <div class="form-check-inline">
 
                 <label for="opt2" class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optradio" id="opt2" (input)="clickRadio($event)"
-                      >REGON
+                    <input type="radio" class="form-check-input" name="optradio" id="opt2"
+                        (input)="clickRadio($event)">REGON
                 </label>
 
             </div>
             <div class="form-check-inline">
                 <label for="opt3" class="form-check-label">
-                    <input type="radio" class="form-check-input" name="optradio" id="opt3" (input)="clickRadio($event)"
-                     >Numer konta
+                    <input type="radio" class="form-check-input" name="optradio" id="opt3"
+                        (input)="clickRadio($event)">Numer konta
                 </label>
             </div>
             <br>
@@ -47,14 +47,13 @@
                 <label for="inputInvoice" class="form-check-label">Numer dokumentu(Opcjonalne)
                 </label>
             </div>
-            <input type="text" class="form-control" id="inputInvoice" name="inputInvoice" autocomplete="off" [(ngModel)]="inputInvoice"
-                (focus)="onFocusInputInvoice()">
+            <input type="text" class="form-control" id="inputInvoice" name="inputInvoice" autocomplete="off"
+                [(ngModel)]="inputInvoice" (focus)="onFocusInputInvoice()">
         </div>
     </div>
     <br>
     <div style="text-align: center;">
-        <button type="button" class = "my-wide-btn"
-        mat-raised-button color="accent" (click)="search()"
+        <button type="button" class="my-wide-btn" mat-raised-button color="accent" (click)="search()"
             [disabled]="enableSearchButton()">SZUKAJ</button>
     </div>
     <br>
