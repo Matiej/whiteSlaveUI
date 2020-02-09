@@ -2,7 +2,6 @@ import { CheckReportDto } from './../model/checkReportDto';
 import { RequestParamDto } from './../model/requestParamDto';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { SearchReport } from '../model/searchreport';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
@@ -13,15 +12,12 @@ export class CheckService {
 
   private readonly WHITE_LIST_APP_ADDRESS: string = 'http://localhost:8080';
   private readonly CHECK_URI: string = '/check';
-  private readonly nipBankAccoutDateURI: string = '"/nip&bankaccount/date"';
+  private readonly nipBankAccoutDateURI: string = '/nip&bankaccount/date';
   private readonly regonBankAccoutDateURI: string = '/regon&bankaccount/date';
-  private readonly regonAndDateURI = '/regon/date';
 
-  private checkReport$ = new BehaviorSubject<SearchReport>(new SearchReport());
-
+  private checkReport$ = new BehaviorSubject<CheckReportDto>(new CheckReportDto());
 
   constructor(private datePipe: DatePipe, private http: HttpClient) { }
-
   public checkByNipBankAccountDate(checkParams: RequestParamDto): Observable<CheckReportDto> {
 
     const transformedDate: string = this.datePipe.transform(checkParams.date, 'yyyy-MM-dd');
@@ -30,8 +26,21 @@ export class CheckService {
     params = params.append('bankAccount', checkParams.bankaAccount);
     params = params.append('date', transformedDate);
 
-    return this.http.get<CheckReportDto>(this.WHITE_LIST_APP_ADDRESS + this.CHECK_URI + this.nipBankAccoutDateURI,
+    let checkReportDto: CheckReportDto = new CheckReportDto();
+    checkReportDto.searchAccount = checkParams.bankaAccount;
+    checkReportDto.searchDate = checkParams.date;
+    checkReportDto.searchInvoice = checkParams.invoice;
+    checkReportDto.searchNip = checkParams.nip;
+    checkReportDto.serachRegon = checkParams.regon;
+    
+    const result: Observable<CheckReportDto> = this.http.get<CheckReportDto>(this.WHITE_LIST_APP_ADDRESS + this.CHECK_URI + this.nipBankAccoutDateURI,
       { params: params });
+    result.subscribe((checkReport: CheckReportDto) => {
+      checkReportDto.requestId = checkReport.requestId;
+      checkReportDto.accountAssigned = checkReport.accountAssigned;
+      this.checkReport$.next(checkReportDto);
+    })
+    return result;
   }
 
   public checkByRegonBankAccountDate(checkParams: RequestParamDto): Observable<CheckReportDto> {
@@ -45,6 +54,14 @@ export class CheckService {
       { params: params })
   }
 
-  
+  public getCheckReportListObs(): Observable<CheckReportDto> {
+    return this.checkReport$.asObservable();
+  }
+
+  public clearCheckReport(): void {
+    this.checkReport$.next(new CheckReportDto());
+  }
+
+
 
 }

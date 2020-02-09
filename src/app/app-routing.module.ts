@@ -10,7 +10,6 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { SearchReport } from './model/searchreport';
-// import { SearchReportComponent } from './search-report/search-report.component';
 import { ArchCheckReportDetailsComponent } from './arch-report/arch-check-report/arch-check-report-details/arch-check-report-details.component';
 import { GovCheckComponent } from './gov-report/gov-check/gov-check.component';
 

@@ -21,8 +21,6 @@ export class SearchResultComponent implements OnInit {
   private getSearchReportListObs(): void {
     this.searchService.getSearchReportListObs().subscribe(search => {
       this.searchReport = search;
-      console.log(search.requestId);
     });
-
   }
 }

@@ -104,7 +104,7 @@
                 <tr>
                     <td class="tleft">Numery rachunków rozliczeniowych lub imiennych rachunków w SKOK</td>
                     <td class="tright">
-                        <div *ngIf="sub.accountNumbersList.length > 1 ; else empty">
+                        <div *ngIf="sub.accountNumbersList.length > 0 ; else empty">
                             <ng-container *ngFor="let repr of sub.accountNumbersList">
                                 <p>{{repr}}</p>
                             </ng-container>

@@ -1,3 +1,4 @@
+import { CheckService } from './service/check.service';
 import { ArchiveService } from './service/archive.service';
 import { SearchService } from './service/search.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -67,6 +68,7 @@ import { GovCheckComponent } from './gov-report/gov-check/gov-check.component';
 import { SearchFormComponent } from './gov-report/gov-search/search-form/search-form.component';
 import { SearchResultComponent } from './gov-report/gov-search/search-result/search-result.component';
 import { CheckFormComponent } from './gov-report/gov-check/check-form/check-form.component';
+import { CheckResultComponent } from './gov-report/gov-check/check-result/check-result.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,7 @@ import { CheckFormComponent } from './gov-report/gov-check/check-form/check-form
     SearchFormComponent,
     SearchResultComponent,
     CheckFormComponent,
+    CheckResultComponent,
 
 
   ],
@@ -172,7 +175,7 @@ import { CheckFormComponent } from './gov-report/gov-check/check-form/check-form
     MatTooltipModule,
     MatStepperModule
   ],
-  providers: [SearchService, ArchiveService,
+  providers: [SearchService, ArchiveService, CheckService,
     DatePipe],
   bootstrap: [AppComponent]
 })

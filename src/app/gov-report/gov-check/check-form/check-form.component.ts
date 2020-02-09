@@ -1,3 +1,4 @@
+import { CheckService } from './../../../service/check.service';
 import { RequestParamDto } from './../../../model/requestParamDto';
 import { Component, OnInit } from '@angular/core';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
@@ -30,13 +31,12 @@ export class CheckFormComponent implements OnInit {
   inputBankValuePlaceholder: string = 'Wpisz numer konta';
   bankInputLength: number = 32;
 
-  isDateValueInputDisable: boolean = true;
   // inputDateValue: Date = new Date();
   dateCheckboxSelected: boolean;
 
   inputInvoiceValuePlaceholder: string = 'Wpisz numer dokumentu'
 
-  constructor() {
+  constructor(private checkService: CheckService) {
     this.bsConfigParams();
     this.checkFormParams.date = new Date();
     this.checkFormParams.bankaAccount = '';
@@ -44,7 +44,6 @@ export class CheckFormComponent implements OnInit {
 
   ngOnInit() {
   }
-
 
   clickRadio(event: any) {
     this.clearSearchFields();
@@ -88,23 +87,28 @@ export class CheckFormComponent implements OnInit {
     this.inputInvoiceValuePlaceholder = '';
   }
 
-  enableSearchButton(): boolean {  
-    return (this.inputCheckValue.length == 0 || this.checkFormParams.bankaAccount.length == 0);
+  enableSearchButton(): boolean {
+    let isButtonDisable: boolean = false;
+    if (this.inputCheckValue == null || this.checkFormParams.bankaAccount == null) {
+      isButtonDisable = true;
+    }
+    else if (this.inputCheckValue.length == 0 || this.checkFormParams.bankaAccount.length == 0) {
+      isButtonDisable = true;
+    }
+    return isButtonDisable;
   }
 
   enableDateInput() {
     this.clearResult();
-    this.isDateValueInputDisable = !this.isDateValueInputDisable;
-    if (this.isDateValueInputDisable) {
-      this.checkFormParams.date = new Date();
-    }
+    this.checkFormParams.date = new Date();
   }
 
-  public search() {
+  public search(checkFrom) {
+    this.clearResult();
     switch (this.inputValueOption) {
       case this.NIP: {
         this.checkFormParams.nip = this.inputCheckValue;
-        // this.serachByNipAndDate();
+        this.checkService.checkByNipBankAccountDate(this.checkFormParams);
         break;
       }
       case this.REGON: {
@@ -115,18 +119,18 @@ export class CheckFormComponent implements OnInit {
       default: {
         console.log('ERRORR!!');
       }
-
     }
     console.log('CHECK FORM  bank-> ' + this.checkFormParams.bankaAccount)
     console.log('CHECK FORM  date-> ' + this.checkFormParams.date)
     console.log('CHECK FORM  inv-> ' + this.checkFormParams.invoice)
     console.log('CHECK FORM  nip-> ' + this.checkFormParams.nip)
     console.log('CHECK FORM REGON-> ' + this.checkFormParams.regon)
-
+    checkFrom.resetForm();
+    this.clearSearchFields();
   }
 
   public clearResult() {
-    // this.searchService.clearSearchReport();
+    this.checkService.clearCheckReport();
   }
 
   private bsConfigParams() {
@@ -140,11 +144,9 @@ export class CheckFormComponent implements OnInit {
     this.inputCheckValue = 'Wpisz wartość';
     this.checkFormParams.nip = '';
     this.checkFormParams.regon = '';
-    this.isCheckValueInputDisable = true;
-
+    // this.isCheckValueInputDisable = true;
 
     this.dateCheckboxSelected = false;
-    this.isDateValueInputDisable = true;
     this.checkFormParams.date = new Date();
 
     this.checkFormParams.bankaAccount = '';
@@ -152,7 +154,6 @@ export class CheckFormComponent implements OnInit {
 
     this.checkFormParams.invoice = '';
     this.inputInvoiceValuePlaceholder = 'Wpisz numer dokumentu';
-    this.isDateValueInputDisable = true;
   }
 
 }

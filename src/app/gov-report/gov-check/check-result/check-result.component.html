@@ -1,0 +1,48 @@
+<div class="container" id="checkTable" *ngIf="checkReport.requestId != null">
+
+    <div id="checkResult">
+
+        <table>
+            <div *ngIf="checkReport.accountAssigned == 'TAK' ; else nie">
+                <img src="/assets/ok.png" alt="checkOk" />
+                <h3>
+                    WYSZUKIWANIE POPRAWNE! UDAŁO SIĘ
+                </h3>
+            </div>
+            <ng-template #nie>
+                
+                <img src="/assets/notok.png" alt="checkNotOk" />
+                <h3>NIESTETY PARAMETRY NIE PASUJĄ</h3>
+            </ng-template>
+            <thead>
+                <th>Identyfikator wyszukiwania:</th>
+                <th><i>{{checkReport.requestId}}</i></th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="tleft">DATA wyszukwania</td>
+                    <td class="tright">{{checkReport.searchDate | date: 'yyyy-MM-dd'}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">Wyszukiwany parametr NIP</td>
+                    <td class="tright">{{checkReport.searchNip}}</td>
+                </tr>
+
+                <tr>
+                    <td class="tleft">Wyszukiwany parametr REGON</td>
+                    <td class="tright">{{checkReport.serachRegon}}</td>
+                </tr>
+
+                <tr>
+                    <td class="tleft">Wyszukiwany numer konta bankowego</td>
+                    <td class="tright">{{checkReport.searchAccount}}</td>
+                </tr>
+                <tr>
+                    <td class="tleft">DOKUMNET DLA WYSZUKIWANIA</td>
+                    <td class="tright">{{checkReport.searchInvoice}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+</div>
