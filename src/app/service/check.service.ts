@@ -18,40 +18,56 @@ export class CheckService {
   private checkReport$ = new BehaviorSubject<CheckReportDto>(new CheckReportDto());
 
   constructor(private datePipe: DatePipe, private http: HttpClient) { }
-  public checkByNipBankAccountDate(checkParams: RequestParamDto): Observable<CheckReportDto> {
+
+  public checkReport(checkParams: RequestParamDto): Observable<CheckReportDto> {
+    if (checkParams.valueType == "REGON") {
+      return this.checkByRegonBankAccountDate(checkParams);
+    } else if (checkParams.valueType == "NIP") {
+      return this.checkByNipBankAccountDate(checkParams);
+    }
+  }
+
+  private checkByNipBankAccountDate(checkParams: RequestParamDto): Observable<CheckReportDto> {
 
     const transformedDate: string = this.datePipe.transform(checkParams.date, 'yyyy-MM-dd');
-    let params = new HttpParams();
-    params = params.append('nip', checkParams.nip);
-    params = params.append('bankAccount', checkParams.bankaAccount);
-    params = params.append('date', transformedDate);
+    let params = new HttpParams()
+      .append('nip', checkParams.value)
+      .append('bankAccount', checkParams.bankaAccount)
+      .append('date', transformedDate);
 
-    let checkReportDto: CheckReportDto = new CheckReportDto();
-    checkReportDto.searchAccount = checkParams.bankaAccount;
-    checkReportDto.searchDate = checkParams.date;
-    checkReportDto.searchInvoice = checkParams.invoice;
-    checkReportDto.searchNip = checkParams.nip;
-    checkReportDto.serachRegon = checkParams.regon;
-    
     const result: Observable<CheckReportDto> = this.http.get<CheckReportDto>(this.WHITE_LIST_APP_ADDRESS + this.CHECK_URI + this.nipBankAccoutDateURI,
       { params: params });
-    result.subscribe((checkReport: CheckReportDto) => {
+
+    this.prepareSearchResult(result, checkParams);
+    return result;
+  }
+
+  private checkByRegonBankAccountDate(checkParams: RequestParamDto): Observable<CheckReportDto> {
+    const transformedDate: string = this.datePipe.transform(checkParams.date, 'yyyy-MM-dd');
+    let params = new HttpParams()
+      .append('regon', checkParams.value)
+      .append('bankAccount', checkParams.bankaAccount)
+      .append('date', transformedDate);
+
+    const result = this.http.get<CheckReportDto>(this.WHITE_LIST_APP_ADDRESS + this.CHECK_URI + this.regonBankAccoutDateURI,
+      { params: params });
+
+    this.prepareSearchResult(result, checkParams);
+    return result;
+  }
+
+  private prepareSearchResult(httpResponse: Observable<CheckReportDto>, params: RequestParamDto): void {
+    let checkReportDto: CheckReportDto = new CheckReportDto();
+    checkReportDto.searchAccount = params.bankaAccount;
+    checkReportDto.searchDate = params.date;
+    checkReportDto.searchInvoice = params.invoice;
+    checkReportDto.searchNip = params.value;
+
+    httpResponse.subscribe((checkReport: CheckReportDto) => {
       checkReportDto.requestId = checkReport.requestId;
       checkReportDto.accountAssigned = checkReport.accountAssigned;
       this.checkReport$.next(checkReportDto);
     })
-    return result;
-  }
-
-  public checkByRegonBankAccountDate(checkParams: RequestParamDto): Observable<CheckReportDto> {
-    const transformedDate: string = this.datePipe.transform(checkParams.date, 'yyyy-MM-dd');
-    let params = new HttpParams();
-    params.append('regon', checkParams.regon);
-    params.append('bankAccount', checkParams.bankaAccount);
-    params.append('date', transformedDate);
-
-    return this.http.get<CheckReportDto>(this.WHITE_LIST_APP_ADDRESS + this.CHECK_URI + this.regonBankAccoutDateURI,
-      { params: params })
   }
 
   public getCheckReportListObs(): Observable<CheckReportDto> {

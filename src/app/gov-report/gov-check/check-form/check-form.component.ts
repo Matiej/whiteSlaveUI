@@ -1,7 +1,8 @@
 import { CheckService } from './../../../service/check.service';
 import { RequestParamDto } from './../../../model/requestParamDto';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BsDatepickerConfig } from 'ngx-bootstrap';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-check-form',
@@ -13,51 +14,51 @@ export class CheckFormComponent implements OnInit {
 
   private readonly colorTheme: string = 'theme-dark-blue';
   private readonly dateFormat: string = 'YYYY-MM-DD';
-  private readonly NIP = 'c-opt1';
-  private readonly REGON = 'c-opt2';
+  private readonly NIP = 'r-nip';
+  private readonly REGON = 'r-regon';
 
-  bsConfig: Partial<BsDatepickerConfig>;
+  private bsConfig: Partial<BsDatepickerConfig>;
 
+  @ViewChild('checkForm', { static: true })
+  private checkF: NgForm;
 
   checkFormParams: RequestParamDto = new RequestParamDto();
 
-  inputValueOption: string = '';
-  inputCheckValue: string = '';
   isCheckValueInputDisable: boolean = true;
   inputCheckValuePlaceholder: string = 'Wpisz wartość';
   checkValueInputMaxLength: number = 33;
   checkValueInputMinLength: number = 0;
 
-  inputBankValuePlaceholder: string = 'Wpisz numer konta';
+  readonly inputBankValuePlaceholder: string = 'Wpisz numer konta';
   bankInputLength: number = 32;
 
-  // inputDateValue: Date = new Date();
   dateCheckboxSelected: boolean;
+  isDateDisable = true;
 
-  inputInvoiceValuePlaceholder: string = 'Wpisz numer dokumentu'
+  readonly inputInvoiceValuePlaceholder: string = 'Wpisz numer dokumentu'
 
   constructor(private checkService: CheckService) {
     this.bsConfigParams();
-    this.checkFormParams.date = new Date();
-    this.checkFormParams.bankaAccount = '';
   }
 
   ngOnInit() {
+
   }
 
   clickRadio(event: any) {
-    this.clearSearchFields();
+    this.clearResult();
     this.isCheckValueInputDisable = false;
-    this.inputCheckValue = '';
-    this.inputValueOption = event.target.id;
+
     switch (event.target.id) {
       case this.NIP: {
+        this.checkFormParams.valueType = 'NIP'
         this.inputCheckValuePlaceholder = "Wpisz numer NIP";
         this.checkValueInputMaxLength = 10;
         this.checkValueInputMinLength = 10;
         break;
       }
       case this.REGON: {
+        this.checkFormParams.valueType = 'REGON'
         this.inputCheckValuePlaceholder = "Wpisz numer REGON";
         this.checkValueInputMaxLength = 14;
         this.checkValueInputMinLength = 9;
@@ -73,26 +74,26 @@ export class CheckFormComponent implements OnInit {
   }
 
   onFocusInputCheckFiled() {
-    this.inputCheckValue = '';
+    this.checkFormParams.value = '';
     this.inputCheckValuePlaceholder = '';
   }
 
   onFocusInputBankField() {
     this.checkFormParams.bankaAccount = '';
-    this.inputBankValuePlaceholder = '';
+    // this.inputBankValuePlaceholder = '';
   }
 
   onFocusInputInvoice() {
     this.checkFormParams.invoice = '';
-    this.inputInvoiceValuePlaceholder = '';
+    // this.inputInvoiceValue Placeholder = '';
   }
 
   enableSearchButton(): boolean {
     let isButtonDisable: boolean = false;
-    if (this.inputCheckValue == null || this.checkFormParams.bankaAccount == null) {
+    if (this.checkFormParams.value == null || this.checkFormParams.bankaAccount == null) {
       isButtonDisable = true;
     }
-    else if (this.inputCheckValue.length == 0 || this.checkFormParams.bankaAccount.length == 0) {
+    else if (this.checkFormParams.value.length == 0 || this.checkFormParams.bankaAccount.length == 0) {
       isButtonDisable = true;
     }
     return isButtonDisable;
@@ -100,33 +101,35 @@ export class CheckFormComponent implements OnInit {
 
   enableDateInput() {
     this.clearResult();
-    this.checkFormParams.date = new Date();
+    this.isDateDisable = !this.isDateDisable;
+    // this.checkFormParams.date = new Date();
   }
 
   public search(checkFrom) {
-    this.clearResult();
-    switch (this.inputValueOption) {
-      case this.NIP: {
-        this.checkFormParams.nip = this.inputCheckValue;
-        this.checkService.checkByNipBankAccountDate(this.checkFormParams);
-        break;
-      }
-      case this.REGON: {
-        this.checkFormParams.regon = this.inputCheckValue;
-        // this.searchByRegonAndDate()
-        break;
-      }
-      default: {
-        console.log('ERRORR!!');
-      }
-    }
+    this.checkService.checkReport(this.checkFormParams);
+    // switch (this.checkFormParams.valueType) {
+    //   case 'NIP': {
+    //  this.checkService.checkReport(this.checkFormParams);
+    //     break;
+    //   }
+    //   case 'REGON': {
+    //     // this.checkFormParams.regon = this.inputCheckValue;
+    //     // this.searchByRegonAndDate()
+    //     break;
+    //   }
+    //   default: {
+    //     // console.log('ERRORR!!');
+    //   }
+
     console.log('CHECK FORM  bank-> ' + this.checkFormParams.bankaAccount)
     console.log('CHECK FORM  date-> ' + this.checkFormParams.date)
     console.log('CHECK FORM  inv-> ' + this.checkFormParams.invoice)
-    console.log('CHECK FORM  nip-> ' + this.checkFormParams.nip)
-    console.log('CHECK FORM REGON-> ' + this.checkFormParams.regon)
-    checkFrom.resetForm();
+    console.log('CHECK FORM  value-> ' + this.checkFormParams.value)
+    console.log('CHECK FORM  valueType-> ' + this.checkFormParams.valueType)
+
+
     this.clearSearchFields();
+    this.clearResult();
   }
 
   public clearResult() {
@@ -140,20 +143,9 @@ export class CheckFormComponent implements OnInit {
   }
 
   private clearSearchFields() {
-
-    this.inputCheckValue = 'Wpisz wartość';
-    this.checkFormParams.nip = '';
-    this.checkFormParams.regon = '';
-    // this.isCheckValueInputDisable = true;
-
+    this.checkFormParams = new RequestParamDto();
     this.dateCheckboxSelected = false;
-    this.checkFormParams.date = new Date();
-
-    this.checkFormParams.bankaAccount = '';
-    this.inputBankValuePlaceholder = 'Wpisz numer konta';
-
-    this.checkFormParams.invoice = '';
-    this.inputInvoiceValuePlaceholder = 'Wpisz numer dokumentu';
+    this.inputCheckValuePlaceholder = 'Wpisz wartość';
   }
 
 }
