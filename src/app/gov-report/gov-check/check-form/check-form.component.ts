@@ -40,7 +40,7 @@ export class CheckFormComponent implements OnInit {
   constructor(private checkService: CheckService) {
     this.bsConfigParams();
   }
-
+//todo przerobić na formularz reacive
   ngOnInit() {
 
   }
@@ -107,19 +107,6 @@ export class CheckFormComponent implements OnInit {
 
   public search(checkFrom) {
     this.checkService.checkReport(this.checkFormParams);
-    // switch (this.checkFormParams.valueType) {
-    //   case 'NIP': {
-    //  this.checkService.checkReport(this.checkFormParams);
-    //     break;
-    //   }
-    //   case 'REGON': {
-    //     // this.checkFormParams.regon = this.inputCheckValue;
-    //     // this.searchByRegonAndDate()
-    //     break;
-    //   }
-    //   default: {
-    //     // console.log('ERRORR!!');
-    //   }
 
     console.log('CHECK FORM  bank-> ' + this.checkFormParams.bankaAccount)
     console.log('CHECK FORM  date-> ' + this.checkFormParams.date)

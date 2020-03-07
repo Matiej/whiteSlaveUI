@@ -1,5 +1,5 @@
-<div class="container">
-    <br>
+<!-- <div class="container"> -->
+<!-- <br>
     <div class="form-row ">
         <div class="form-group col-md-6 mb-3 pb-3 input-group-lg">
             <div class="form-check-inline">
@@ -57,5 +57,72 @@
             [disabled]="enableSearchButton()">SZUKAJ</button>
     </div>
     <br>
+</div> -->
 
+
+<br>
+<h1 style="text-align: center;">OD TEGO MOMENTU NOWY TESTOWY FORMULARZ</h1>
+<br>
+
+<div class="container">
+    <form [formGroup]="searchFormular" (ngSubmit)="sumbmitSearchForm()">
+        <div class="form-row ">
+            <div class="form-group col-md-6 mb-3 pb-3 input-group-lg">
+                <div class="form-check-inline">
+                    <label class="form-check-label" for="typeValue">
+                        <input value="NIP" type="radio" class="form-check-input" name="typeValue" id="typeValue"
+                            formControlName="typeValue">NIP
+                    </label>
+                </div>
+                <div class="form-check-inline">
+
+                    <label for="typeValue" class="form-check-label">
+                        <input value="REGON" type="radio" class="form-check-input" name="typeValue" id="typeValue"
+                            formControlName="typeValue">REGON
+                    </label>
+                </div>
+                <div class="form-check-inline">
+                    <label for="typeValue" class="form-check-label">
+                        <input value="bankAccount" type="radio" class="form-check-input" name="typeValue" id="typeValue"
+                            formControlName="typeValue">Numer konta
+                    </label>
+                </div>
+                <br>
+                <input type="text" class="form-control" name="searchValue" id="searchValue"
+                    [placeholder]="inputSearchValuePlacholder" autocomplete="off" formControlName="searchValue">
+                <div style = "color: brown; text-align: center;" *ngIf="searchFormular.get('searchValue').invalid && searchFormular.get('searchValue').dirty">Pole wymagane!</div>
+                <div style = "color: red; text-align: center;"*ngIf="searchFormular.get('searchValue').errors && searchFormular.get('searchValue').errors['nipValidated']">Błędny numer NIP</div>
+                <div style = "color: red; text-align: center;"*ngIf="searchFormular.get('searchValue').errors && searchFormular.get('searchValue').errors['regonValidated']">Błędny numer REGON</div>
+                <div style = "color: red; text-align: center;"*ngIf="searchFormular.get('searchValue').errors && searchFormular.get('searchValue').errors['bankAccountValidated']">Błędny numer konta</div>
+                
+            </div>
+
+            <div id="dateLabel" class="form-group col-ms-5 mb-3 pb-3 input-group-lg">
+                <div lass="form-check-inline">
+                    <label for="inputDateValue" class="form-check-label">Wyszukaj dane na dzień:
+                        {{inputDateValue | date: 'yyyy-MM-dd'}}</label>
+                </div>
+                <input type="text" class="form-control" id="inputDateValue" name="inputDateValue"
+                    [value]="inputDateValue | date: 'yyyy-MM-dd'" formControlName="inputDateValue" autocomplete="off"
+                    bsDatepicker [bsConfig]="bsConfig">
+                <div class="form-check-inline" style="padding-inline-start: 30%; margin-left: 25%; margin-right: 5%;">
+                    <label class="form-check-label" for="checkBoxDate">
+                        <input type="checkbox" class="form-check-input" (click)="enableDateInputForm()">Zmień
+                        datę</label>
+                </div>
+            </div>
+            <div id="inputInvoiceForm" class="form-group col-ms-5 mb-3 ml-1 pb-3 input-group-lg">
+                <div class="form-check-inline">
+                    <label for="inputInvoice" class="form-check-label">Numer dokumentu(Opcjonalne)</label>
+                </div>
+                <input type="text" class="form-control" id="inputInvoice" name="inputInvoice"
+                    formControlName="inputInvoice" autocomplete="off" [placeholder]="inputInvoicePlaceHolder">
+            </div>
+        </div>
+        <br>
+        <div style="text-align: center;">
+            <button type="submit" class="my-wide-btn" mat-raised-button color="accent" [disabled]="searchFormular.invalid">SZUKAJ</button>
+        </div>
+
+    </form>
 </div>

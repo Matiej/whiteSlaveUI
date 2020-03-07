@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { RequestParamDto } from '../model/requestParamDto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,44 +20,67 @@ export class SearchService {
 
   constructor(private datePipe: DatePipe, private http: HttpClient) { }
 
-  public seachByNipAndDate(nip: string, date: Date, invoice: string): Observable<SearchReport> {
+  public searchReport(searchParams: RequestParamDto): Observable<SearchReport> {
+    let result: Observable<SearchReport> = new Observable();
 
-    let transformedDate: string = this.datePipe.transform(date, 'yyyy-MM-dd');
-    let params = new HttpParams();
-    params = params.append('nip', nip);
-    params = params.append('date', transformedDate);
+    if (searchParams.valueType == "NIP") {
+      result = this.searchByNipAndDate(searchParams);
+    } else if (searchParams.valueType == "REGON") {
+      result = this.searchByREGONAndDate(searchParams);
+    } else if (searchParams.valueType == "bankAccount") {
+      result = this.searchByBankAccountAndDate(searchParams);
+    }
 
-    return this.http.get<SearchReport>(this.WHITE_LIST_APP_ADDRESS + this.SEARCH_URI + this.nipAndDateURI,
-      { params: params });
-
+    return result;
   }
 
-  public searchByRegonAndDate(regon: string, date: Date, invoice: string): Observable<SearchReport> {
-
-    let transformedDate: string = this.datePipe.transform(date, 'yyyy-MM-dd');
-    const params = new HttpParams().set('regon', regon).set('date', transformedDate);
-
-    return this.http.get<SearchReport>(this.WHITE_LIST_APP_ADDRESS + this.SEARCH_URI + this.regonAndDateURI,
+  private searchByNipAndDate(searchParams: RequestParamDto): Observable<SearchReport> {
+    const transformedDate: string = this.datePipe.transform(searchParams.date, 'yyyy-MM-dd');
+    let params = new HttpParams()
+      .append('nip', searchParams.value)
+      .append('date', transformedDate);
+    const result: Observable<SearchReport> = this.http.get<SearchReport>(this.WHITE_LIST_APP_ADDRESS + this.SEARCH_URI + this.nipAndDateURI,
       { params: params });
 
+    result.subscribe((searchReport: SearchReport) => {
+      searchReport.searchDate = searchParams.date;
+      this.searchReport$.next(searchReport);
+    })
+    return result;
   }
 
-  public searchByBankAccountAndDate(bankAccount: string, date: Date, invoice: string): Observable<SearchReport> {
-
-    let transformedDate: string = this.datePipe.transform(date, 'yyyy-MM-dd');
-    const params = new HttpParams().set('bankAccount', bankAccount).set('date', transformedDate);
-
-    return this.http.get<SearchReport>(this.WHITE_LIST_APP_ADDRESS + this.SEARCH_URI + this.bankAccountAndDateURI,
+  private searchByREGONAndDate(searchParams: RequestParamDto): Observable<SearchReport> {
+    const transformedDate: string = this.datePipe.transform(searchParams.date, 'yyyy-MM-dd');
+    let params = new HttpParams()
+      .append('regon', searchParams.value)
+      .append('date', transformedDate);
+    const result: Observable<SearchReport> = this.http.get<SearchReport>(this.WHITE_LIST_APP_ADDRESS + this.SEARCH_URI + this.regonAndDateURI,
       { params: params });
 
+    result.subscribe((searchReport: SearchReport) => {
+      searchReport.searchDate = searchParams.date;
+      this.searchReport$.next(searchReport);
+    })
+    return result;
+  }
+
+  private searchByBankAccountAndDate(searchParams: RequestParamDto): Observable<SearchReport> {
+    const transformedDate: string = this.datePipe.transform(searchParams.date, 'yyyy-MM-dd');
+    let params = new HttpParams()
+      .append('bankAccount', searchParams.value)
+      .append('date', transformedDate);
+    const result: Observable<SearchReport> = this.http.get<SearchReport>(this.WHITE_LIST_APP_ADDRESS + this.SEARCH_URI + this.bankAccountAndDateURI,
+      { params: params });
+
+    result.subscribe((searchReport: SearchReport) => {
+      searchReport.searchDate = searchParams.date;
+      this.searchReport$.next(searchReport);
+    })
+    return result;
   }
 
   public getSearchReportListObs(): Observable<SearchReport> {
     return this.searchReport$.asObservable();
-  }
-
-  public showAndSendSearchReport(searchReport: SearchReport) {
-    this.searchReport$.next(searchReport);
   }
 
   public clearSearchReport() {

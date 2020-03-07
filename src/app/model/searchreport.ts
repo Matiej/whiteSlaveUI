@@ -4,6 +4,7 @@ export class SearchReport {
 
     private _requestId: string;
     private _subjectDtoList: Array<SubjectDto>;
+    private _searchDate: Date;
 
     /**
      * Getter requestId
@@ -34,8 +35,26 @@ export class SearchReport {
      * @param {Array<SubjectDto>} value
      */
 	public set subjectDtoList(value: Array<SubjectDto>) {
-		this._subjectDtoList = value;
+        this._subjectDtoList = value;
+    }
+    
+
+    /**
+     * Getter searchDate
+     * @return {Date}
+     */
+	public get searchDate(): Date {
+		return this._searchDate;
 	}
+
+    /**
+     * Setter searchDate
+     * @param {Date} value
+     */
+	public set searchDate(value: Date) {
+		this._searchDate = value;
+	}
+    
 
 
     

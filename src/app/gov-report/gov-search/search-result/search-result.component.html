@@ -3,8 +3,8 @@
     <Div id="searchTable-ok">
         <table>
             <thead>
-                <th>Identyfikator wyszukiwania:</th>
-                <th><i>{{searchReport.requestId}}</i></th>
+                <th>Identyfikator wyszukiwania|Data wyszukiwania:</th>
+                <th><i>{{searchReport.requestId}}|{{searchReport.searchDate | date: 'yyyy-MM-dd'}}</i></th>
             </thead>
             <tbody *ngFor="let sub of searchReport.subjectDtoList">
                 <tr>

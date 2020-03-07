@@ -5,7 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { BsDatepickerModule } from 'ngx-bootstrap';
@@ -92,18 +92,16 @@ import { CheckResultComponent } from './gov-report/gov-check/check-result/check-
     SearchFormComponent,
     SearchResultComponent,
     CheckFormComponent,
-    CheckResultComponent,
-
-
-  ],
+    CheckResultComponent
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     BsDatepickerModule.forRoot(), AlertModule.forRoot(),
-    BrowserAnimationsModule, NoopAnimationsModule,
+    BrowserAnimationsModule, 
+    NoopAnimationsModule,
     HttpClientModule,
-
     FlexLayoutModule,
     MatIconModule,
     MatButtonModule,
@@ -136,7 +134,8 @@ import { CheckResultComponent } from './gov-report/gov-check/check-result/check-
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatStepperModule
+    MatStepperModule,
+    ReactiveFormsModule
 
   ],
   exports: [
