@@ -2,16 +2,16 @@ import { CheckService } from './service/check.service';
 import { ArchiveService } from './service/archive.service';
 import { SearchService } from './service/search.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { AlertModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EmptyValuePipe } from './shared/empty-value.pipe';
 import { ReportListPipe } from './shared/report-list.pipe';
@@ -70,6 +70,10 @@ import { SearchResultComponent } from './gov-report/gov-search/search-result/sea
 import { CheckFormComponent } from './gov-report/gov-check/check-form/check-form.component';
 import { CheckResultComponent } from './gov-report/gov-check/check-result/check-result.component';
 
+import localePl from '@angular/common/locales/pl';
+import { ArchSearchReportListComponent } from './arch-report/arch-search-report/arch-search-report-list/arch-search-report-list.component';
+registerLocaleData(localePl);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,14 +96,15 @@ import { CheckResultComponent } from './gov-report/gov-check/check-result/check-
     SearchFormComponent,
     SearchResultComponent,
     CheckFormComponent,
-    CheckResultComponent
-      ],
+    CheckResultComponent,
+    ArchSearchReportListComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    BsDatepickerModule.forRoot(), AlertModule.forRoot(),
-    BrowserAnimationsModule, 
+    BsDatepickerModule.forRoot(), AlertModule.forRoot(), //to jest do daty aby ladnie sie wyswietlala
+    BrowserAnimationsModule,
     NoopAnimationsModule,
     HttpClientModule,
     FlexLayoutModule,
@@ -174,8 +179,13 @@ import { CheckResultComponent } from './gov-report/gov-check/check-result/check-
     MatTooltipModule,
     MatStepperModule
   ],
-  providers: [SearchService, ArchiveService, CheckService,
-    DatePipe],
+  providers: [
+    SearchService,
+    ArchiveService,
+    CheckService,
+    DatePipe,
+    {provide: LOCALE_ID, useValue: 'pl-PL'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

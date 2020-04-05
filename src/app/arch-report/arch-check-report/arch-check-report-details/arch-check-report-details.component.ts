@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ArchResponseReport } from 'src/app/model/archResponseReport';
+import { ArchCheckReport } from 'src/app/model/archCheckReport';
 import { ArchiveService } from 'src/app/service/archive.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
@@ -10,14 +10,14 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class ArchCheckReportDetailsComponent implements OnInit {
 
-  archReportRequest: ArchResponseReport = new ArchResponseReport();
+  archReportRequest: ArchCheckReport = new ArchCheckReport();
  
   constructor(private archService: ArchiveService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe((param: Params) => {
       this.archService.findSyncCheckReportById(param.get('id'))
-        .subscribe((archResponseReport: ArchResponseReport) => {
+        .subscribe((archResponseReport: ArchCheckReport) => {
            this.archReportRequest = archResponseReport;
         });
     });

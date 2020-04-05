@@ -25,13 +25,13 @@ td,th {
   td.tleft{
     /* border-right: 1px solid #eee; */
     text-align: left;
-    color: white;
+    color: black;
     font-size: 11px;
   }
 
   td.tright{
     /* border-right: 1px solid #b8b8b8; */
     text-align: right;
-    color: white;
+    color: black;
     font-size: 11px;
   }

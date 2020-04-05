@@ -5,20 +5,24 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 mat-sidenav-container, mat-sidenav-content, mat-sidenav {
     height: 100%;
+    /* background-color: rgba(249, 250, 249, 0.979); */
+    background-color: white;
+    color: black;
   }
   
   mat-sidenav {
     width: 250px;
+     
   }
   
   a {
     text-decoration: none;
-    color: white;
+    color: rgb(231, 225, 225);
   }
   
   a:hover,
   a:active {
-    color: lightgray;
+    color: rgb(148, 149, 156);
   }
   
   .navigation-items {

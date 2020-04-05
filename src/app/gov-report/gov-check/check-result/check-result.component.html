@@ -10,7 +10,6 @@
                 </h3>
             </div>
             <ng-template #nie>
-                
                 <img src="/assets/notok.png" alt="checkNotOk" />
                 <h3>NIESTETY PARAMETRY NIE PASUJĄ</h3>
             </ng-template>
@@ -21,7 +20,7 @@
             <tbody>
                 <tr>
                     <td class="tleft">DATA wyszukwania</td>
-                    <td class="tright">{{checkReport.searchDate | date: 'yyyy-MM-dd'}}</td>
+                    <td class="tright">{{checkReport.searchDate | date: 'yyyy-MM-dd':'':'pl'}}</td>
                 </tr>
                 <tr>
                     <td class="tleft">Wyszukiwany parametr NIP</td>

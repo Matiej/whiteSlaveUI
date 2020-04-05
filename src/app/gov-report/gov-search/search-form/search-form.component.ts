@@ -5,6 +5,7 @@ import { SearchReport } from 'src/app/model/searchreport';
 import { FormGroup, FormControl, Validators, FormArray, AbstractControl, ValidationErrors } from '@angular/forms';
 import { RequestParamDto } from 'src/app/model/requestParamDto';
 
+
 @Component({
   selector: 'app-search-form',
   templateUrl: './search-form.component.html',
@@ -21,6 +22,7 @@ export class SearchFormComponent implements OnInit {
   inputSearchValuePlacholder: string = 'Wybierz typ paramentru szukania';
   inputInvoicePlaceHolder = ' Wpisz wartość';
   inputDateValue: Date = new Date();
+  acutalDate: Date = new Date();
   searchFormular: FormGroup;
 
   constructor(private searchService: SearchService) {
@@ -32,26 +34,12 @@ export class SearchFormComponent implements OnInit {
       typeValue: new FormControl(null, Validators.required),
       searchValue: new FormControl({ value: null, disabled: true }, [Validators.required]),
       inputDateValue: new FormControl({ value: new Date(), disabled: true }, Validators.required),
-      inputInvoice: new FormControl(null, Validators.maxLength(100))
+      inputInvoice: new FormControl(null, Validators.maxLength(100)),
+      chbbx: new FormControl(false)
     });
 
-    this.searchFormular.get('typeValue')
-      .valueChanges
-      .subscribe(value => {
-        this.typeValueChangeEvent(value);
-        const searchValueFiled = this.searchFormular.get('searchValue')
-        console.log('ONINIT searValueF ' + searchValueFiled);
-        if (value == 'NIP') {
-          searchValueFiled.enable();
-          searchValueFiled.setValidators([Validators.required, this.nipValidator]);
-        } else if (value == 'REGON') {
-          searchValueFiled.enable();
-          searchValueFiled.setValidators([Validators.required, this.regonValidator]);
-        } else if (value == 'bankAccount') {
-          searchValueFiled.enable();
-          searchValueFiled.setValidators([Validators.required, this.bankAccountValidator]);
-        }
-      })
+    this.typeValueChangeSearchValeValidator();
+    this.dateInputValueRefresh()
   }
 
   sumbmitSearchForm(): void {
@@ -59,16 +47,17 @@ export class SearchFormComponent implements OnInit {
     this.searchFormParams.value = this.searchFormular.value.searchValue;
     this.searchFormParams.date = this.searchFormular.get('inputDateValue').value;
     this.searchFormParams.invoice = this.searchFormular.value.inputInvoice;
+    const typeFormValue: string = this.searchFormular.value.typeValue;
 
     this.searchService.searchReport(this.searchFormParams);
+
     this.onReset();
   }
 
   private onReset() {
     this.searchFormular.reset({
-      // typeValue: 'NIP',
-
-      inputDateValue: new Date()
+      chbbx: false,
+      inputDateValue: { value: new Date(), disabled: true }
     });
   }
 
@@ -90,30 +79,7 @@ export class SearchFormComponent implements OnInit {
       { dateInputFormat: this.dateFormat },
       { maxDate: new Date() });
   }
-
-  private typeValueChangeEvent(radioValue: string): void {
-    console.log('odpalam valeplas')
-    const searchValueFiled = this.searchFormular.get('searchValue')
-
-    if (radioValue != null && radioValue == 'NIP') {
-      this.inputSearchValuePlacholder = 'Wpisz poprawną wartość NIP';
-      searchValueFiled.reset();
-      searchValueFiled.enable();
-      searchValueFiled.setValidators([Validators.required, this.nipValidator]);
-    } else if (radioValue != null && radioValue == 'REGON') {
-      searchValueFiled.reset();
-      this.inputSearchValuePlacholder = 'Wpisz poprawną wartość REGON';
-      searchValueFiled.enable();
-      searchValueFiled.setValidators([Validators.required, this.regonValidator]);
-    } else if (radioValue != null && radioValue == 'bankAccount') {
-      searchValueFiled.reset();
-      this.inputSearchValuePlacholder = 'Wpisz numer konta (tylko cyfry)';
-      searchValueFiled.enable();
-      searchValueFiled.setValidators([Validators.required, this.bankAccountValidator]);
-    }
-  }
-
-
+  //todo NAPISAC WALIDATORY!!!!!
   private nipValidator(control: AbstractControl): ValidationErrors {
     const searchVal = <string>control.value;
     console.log('CONTROL nipvalidator');
@@ -133,6 +99,37 @@ export class SearchFormComponent implements OnInit {
     console.log('CONTROL bank validator');
     console.log(control);
     return searchVal != null && searchVal.length < 10 ? { bankAccountValidated: true } : null;
+  }
+
+  private typeValueChangeSearchValeValidator() {
+    this.searchFormular.get('typeValue')
+      .valueChanges
+      .subscribe(value => {
+        const searchValueFiled = this.searchFormular.get('searchValue')
+        if (value == 'NIP') {
+          searchValueFiled.reset();
+          this.inputSearchValuePlacholder = 'Wpisz poprawną wartość NIP';
+          searchValueFiled.enable();
+          searchValueFiled.setValidators([Validators.required, this.nipValidator]);
+        } else if (value == 'REGON') {
+          searchValueFiled.reset();
+          this.inputSearchValuePlacholder = 'Wpisz poprawną wartość REGON';
+          searchValueFiled.enable();
+          searchValueFiled.setValidators([Validators.required, this.regonValidator]);
+        } else if (value == 'bankAccount') {
+          searchValueFiled.reset();
+      this.inputSearchValuePlacholder = 'Wpisz numer konta (tylko cyfry)';
+          searchValueFiled.enable();
+          searchValueFiled.setValidators([Validators.required, this.bankAccountValidator]);
+        }
+      });
+  }
+ 
+  private dateInputValueRefresh() {
+    this.searchFormular.get('inputDateValue')
+      .valueChanges.subscribe(value => {
+        this.inputDateValue = value;
+      });
   }
 
 }

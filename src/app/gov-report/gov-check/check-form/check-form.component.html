@@ -39,7 +39,7 @@
                 <div id="checkDateFrom" class="form-group col-ms-5 mb-3 pb-3 input-group-lg">
                     <div lass="form-check-inline">
                         <label for="inputDateValue" class="form-check-label">Wyszukaj dane na dzień:
-                            {{checkFormParams.date | date: 'yyyy-MM-dd'}}</label>
+                            {{checkFormParams.date | date: 'fullDate':'':'pl'}}</label>
                     </div>
                     <input type="text" class="form-control" id="inputDateValue" name="inputDateValue" autocomplete="off"
                         [disabled]="isDateDisable" bsDatepicker [bsConfig]="bsConfig"

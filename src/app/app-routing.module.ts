@@ -52,23 +52,6 @@ const routes: Routes = [
     path: 'archsearchreports',
     component: ArchSearchReportComponent
   },
-
-  // {
-  //   path: 'archCheckReports',
-  //   component: ArchCheckReponseReportComponent,
-  //   children: [
-  //     // {
-  //     //   path: '',
-  //     //   component: ArchCheckReponseListComponent 
-  //     // },
-
-  //     {
-  //       path: ':id',
-  //       component: ArchCheckDetailsComponent
-  //     }
-  //   ]
-  // },
-
   {
     path: '**',
     component: Page404Component
