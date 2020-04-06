@@ -43,7 +43,7 @@ const routes: Routes = [
     component: ArchCheckReportComponent,
     children: [
       {
-        path: ':id',
+        path: ':id', 
         component: ArchCheckReportDetailsComponent
       }
     ]

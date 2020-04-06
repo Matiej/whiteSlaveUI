@@ -1,13 +1,14 @@
 export interface ArchSearchReport {
 
     id: number;
-    requestId: string;
+    searchResponseReportEntityRequestId: string;
     name: string;
-    requestDate: string;
-    requestNip: string;
-    requestRegon: string;
-    requestBankAccount: string;
-    numberSubjectNo: string;
-    searchResult: string;
+    statusVat:string;
+    searchResponseReportEntityReportSyncRequestEntityRequestDate: string;
+    searchResponseReportEntityReportSyncRequestEntityRequestNip: string;
+    searchResponseReportEntityReportSyncRequestEntityRequestRegon: string;
+    searchResponseReportEntityReportSyncRequestEntityRequestBankAccount: string;
+    searchResponseReportEntitySubjectNo: string;
+    searchResponseReportEntityReportSyncRequestEntitySearchResult: string;
 
 }

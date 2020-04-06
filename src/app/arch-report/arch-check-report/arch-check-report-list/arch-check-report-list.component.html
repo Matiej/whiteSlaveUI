@@ -34,7 +34,7 @@
                     <mat-header-cell *matHeaderCellDef mat-sort-header>DATA ZAPYTANIA
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        {{row.requestDate | emptyValue}}
+                        {{row.requestDate | emptyValue | date: 'yyyy-MM-dd HH:mm':'':'pl'}}
                     </mat-cell>
                 </ng-container>
 

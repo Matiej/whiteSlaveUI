@@ -15,9 +15,9 @@ export class YesNoDirective implements OnInit {
 
   ngOnInit(): void {
     let matcell = this.el.nativeElement;
-    if (this.param === 'TAK' || this.param === 'POSITIVE') {
+    if (this.param === 'TAK' || this.param === 'POSITIVE' || this.param === 'Czynny') {
       this.renderer.setStyle(matcell, 'color', 'green');
-    } else if (this.param === 'NIE' || this.param === 'NEGATIVE') {
+    } else if (this.param === 'NIE' || this.param === 'NEGATIVE' || this.param == 'Zwolniony') {
       this.renderer.setStyle(matcell, 'color', 'red');
     }
   }

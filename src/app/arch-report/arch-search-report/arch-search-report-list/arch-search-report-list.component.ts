@@ -52,14 +52,14 @@ export class ArchSearchReportListComponent implements OnInit, AfterViewInit {
 
   createDisplayedColumns(): Array<string> {
     const displayedCol: string[] = [];
-    displayedCol.push('requestId');
+    displayedCol.push('searchResponseReportEntityRequestId');
     displayedCol.push('name');
-    displayedCol.push('requestDate')
-    displayedCol.push('requestNip')
-    displayedCol.push('requestBankAccount')
-    displayedCol.push('searchResult')
-    displayedCol.push('subjecNo')
-
+    displayedCol.push('searchResponseReportEntityReportSyncRequestEntityRequestDate')
+    displayedCol.push('searchResponseReportEntityReportSyncRequestEntityRequestNip')
+    displayedCol.push('searchResponseReportEntityReportSyncRequestEntityRequestBankAccount')
+    displayedCol.push('searchResponseReportEntityReportSyncRequestEntitySearchResult');
+    displayedCol.push('searchResponseReportEntitySubjectNo');
+    displayedCol.push('statusVat');
     return displayedCol;
   }
 

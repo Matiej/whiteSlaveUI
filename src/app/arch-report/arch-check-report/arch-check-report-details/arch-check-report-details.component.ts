@@ -16,6 +16,7 @@ export class ArchCheckReportDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe((param: Params) => {
+      console.log(param);
       this.archService.findSyncCheckReportById(param.get('id'))
         .subscribe((archResponseReport: ArchCheckReport) => {
            this.archReportRequest = archResponseReport;
