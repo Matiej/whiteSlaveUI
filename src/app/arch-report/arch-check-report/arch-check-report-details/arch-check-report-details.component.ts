@@ -12,17 +12,18 @@ export class ArchCheckReportDetailsComponent implements OnInit {
 
   archReportRequest: ArchCheckReport = new ArchCheckReport();
  
-  constructor(private archService: ArchiveService, private route: ActivatedRoute) { }
+  constructor(private archService: ArchiveService) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe((param: Params) => {
-      console.log(param);
-      this.archService.findSyncCheckReportById(param.get('id'))
-        .subscribe((archResponseReport: ArchCheckReport) => {
-           this.archReportRequest = archResponseReport;
-        });
+    this.archService.getCheckReportDetails().subscribe(checkReportDetails => {
+      this.archReportRequest = checkReportDetails;
     });
+
   }
+
+  
+
+  
 
 
 }

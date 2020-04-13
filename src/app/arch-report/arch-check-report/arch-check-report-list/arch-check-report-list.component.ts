@@ -65,4 +65,8 @@ export class ArchCheckReportListComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
+  sendDetails(id: string) {
+    this.archService.findSyncCheckReportById(id);
+  }
+
 }

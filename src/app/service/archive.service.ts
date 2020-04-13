@@ -1,6 +1,7 @@
+import { ArchCheckReportComponent } from './../arch-report/arch-check-report/arch-check-report.component';
 import { ArchSearchReport } from './../model/archSearchReport';
 import { ArchSearchReportComponent } from './../arch-report/arch-search-report/arch-search-report.component';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { ArchCheckReport } from './../model/archCheckReport';
 import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
@@ -16,23 +17,36 @@ export class ArchiveService {
   private readonly ARCH_CHECK_REPORTS: string = '/checkSyncReports';
   private readonly ARCH_CHECK_REPORT_BYID: string = '/checkSyncReport';
   private readonly ARCH_SEARCH_REPORTS: string = '/searchSyncReports';
-  
+
+  private checkReportDetails$ = new BehaviorSubject<ArchCheckReport>(new ArchCheckReport());
+
   constructor(private datePipe: DatePipe, private http: HttpClient) { }
 
   public findAllSyncCheckReports(): Observable<Array<ArchCheckReport>> {
-  return this.http.get<Array<ArchCheckReport>>(this.WHITE_LIST_APP_ADDRESS + this.REPORT_QUERY_URI
-    + this.ARCH_CHECK_REPORTS);
+    return this.http.get<Array<ArchCheckReport>>(this.WHITE_LIST_APP_ADDRESS + this.REPORT_QUERY_URI
+      + this.ARCH_CHECK_REPORTS);
   }
 
   public findSyncCheckReportById(id: string): Observable<ArchCheckReport> {
     const idParam = new HttpParams().set('id', id);
-    return this.http.get<ArchCheckReport>(this.WHITE_LIST_APP_ADDRESS + this.REPORT_QUERY_URI
-      + this.ARCH_CHECK_REPORT_BYID, {params: idParam});
+    const result = this.http.get<ArchCheckReport>(this.WHITE_LIST_APP_ADDRESS + this.REPORT_QUERY_URI
+      + this.ARCH_CHECK_REPORT_BYID, { params: idParam });
+
+
+    result.subscribe(checkReport => {
+      this.checkReportDetails$.next(checkReport);
+    })
+
+    return result;
   }
 
   public findAllArchiveSearchReports(): Observable<Array<ArchSearchReport>> {
     return this.http.get<Array<ArchSearchReport>>(this.WHITE_LIST_APP_ADDRESS + this.REPORT_QUERY_URI
       + this.ARCH_SEARCH_REPORTS);
   }
- 
+
+  public getCheckReportDetails(): Observable<ArchCheckReport> {
+    return this.checkReportDetails$.asObservable();
+  }
+
 }

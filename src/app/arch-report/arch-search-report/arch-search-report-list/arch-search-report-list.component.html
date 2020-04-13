@@ -16,10 +16,10 @@
             
             <mat-table [dataSource]="dataSource" matSort>
 
-                <ng-container matColumnDef="searchResponseReportEntityRequestId">
+                <ng-container matColumnDef="requestId">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>ID WYSZUKANIA</mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        <span>{{row.searchResponseReportEntityRequestId}}</span>
+                        <span>{{row.requestId}}</span>
                     </mat-cell>
                 </ng-container>
 
@@ -31,36 +31,36 @@
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="searchResponseReportEntityReportSyncRequestEntityRequestDate">
+                <ng-container matColumnDef="requestDate">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>DATA ZAPYTANIA
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        {{row.searchResponseReportEntityReportSyncRequestEntityRequestDate | date: 'yyyy-MM-dd HH:mm':'':'pl'}}
+                        {{row.requestDate | date: 'yyyy-MM-dd HH:mm':'':'pl'}}
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="searchResponseReportEntityReportSyncRequestEntityRequestNip">
+                <ng-container matColumnDef="requestNip">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>NIP/REGON ZAPYTANIA
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        <span *ngIf="row.searchResponseReportEntityReportSyncRequestEntityRequestNip != null">{{row.searchResponseReportEntityReportSyncRequestEntityRequestNip}}</span>
-                        <span *ngIf="row.searchResponseReportEntityReportSyncRequestEntityRequestRegon != null">{{row.searchResponseReportEntityReportSyncRequestEntityRequestRegon}}</span>
+                        <span *ngIf="row.requestNip != null">{{row.requestNip}}</span>
+                        <span *ngIf="row.requestRegon != null">{{row.requestRegon}}</span>
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="searchResponseReportEntityReportSyncRequestEntityRequestBankAccount">
+                <ng-container matColumnDef="requestBankAccount">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>NR KONTA ZAPYTANIA
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                        {{row.searchResponseReportEntityReportSyncRequestEntityRequestBankAccount | emptyValue}}
+                        {{row.requestBankAccount | emptyValue}}
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="searchResponseReportEntityReportSyncRequestEntitySearchResult">
+                <ng-container matColumnDef="searchResult">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>REZULTAT
                     </mat-header-cell>
-                    <mat-cell *matCellDef="let row" appYesNo [param]="row.searchResponseReportEntityReportSyncRequestEntitySearchResult">
-                        {{row.searchResponseReportEntityReportSyncRequestEntitySearchResult | reportTypeAndResultTransl}}
+                    <mat-cell *matCellDef="let row" appYesNo [param]="row.searchResult">
+                        {{row.searchResult | reportTypeAndResultTransl}}
                     </mat-cell>
                 </ng-container>
 
@@ -72,11 +72,11 @@
                     </mat-cell>
                 </ng-container>
 
-                <ng-container matColumnDef="searchResponseReportEntitySubjectNo">
+                <ng-container matColumnDef="subjectNo">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>ILOŚĆ WYNIKÓW
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                      {{row.searchResponseReportEntitySubjectNo}}
+                      {{row.subjectNo}}
                     </mat-cell>
                 </ng-container>
 

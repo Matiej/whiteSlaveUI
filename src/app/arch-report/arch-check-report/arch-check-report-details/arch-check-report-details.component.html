@@ -1,6 +1,8 @@
 <div style="margin-left: 3%; margin-right: 3;" id="archCheckDetailsTable">
     <div class="szadows">
         <h3>DETALE RAPORTU WERYFIKACYJNEGO</h3>
+        <p>Tutaj url nie moze byc /id z bazy danych. Trzeba to zmienic jakos</p>
+        <p>Najlepiej requestID jak będzie linkiem lub coś stałego wtedy parametr jakoś będzie przekazywany do serwisu i strzał</p>
         <br>
     </div>
 
@@ -10,17 +12,14 @@
             <th><i>{{archReportRequest.requestId}}</i></th>
         </thead>
         <tbody>
-            <tr>
-                <td class="tleft">Numer id raportu</td>
-                <td class="tright">{{archReportRequest.id}}</td>
-            </tr>
+
             <tr>
                 <td class="tleft">Data raportu</td>
                 <td class="tright">{{archReportRequest.reportDate}}</td>
             </tr>
             <tr>
                 <td class="tleft">Data zapytania</td>
-                <td class="tright">{{archReportRequest.requestDate}}</td>
+                <td class="tright">{{archReportRequest.requestDate | date: 'yyyy-MM-dd HH:mm':'':'pl'}}</td>
             </tr>
             <tr>
                 <td class="tleft">Raport w pliku PDF</td>
