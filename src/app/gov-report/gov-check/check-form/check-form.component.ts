@@ -17,7 +17,7 @@ export class CheckFormComponent implements OnInit {
   private readonly NIP = 'r-nip';
   private readonly REGON = 'r-regon';
 
-  private bsConfig: Partial<BsDatepickerConfig>;
+  bsConfig: Partial<BsDatepickerConfig>;
 
   @ViewChild('checkForm', { static: true })
   private checkF: NgForm;
