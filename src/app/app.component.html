@@ -3,21 +3,60 @@
         <mat-nav-list>
             <a mat-list-item routerLink="home">
                 <mat-icon class="icon">home</mat-icon>
-                <span class="label">HOME</span>
-            </a>
-            <a mat-list-item routerLink="searchreport" role="button" routerLinkActive="active">
-
-                <span class="label">RAPOT DOKŁADNY</span>
-            </a>
-            <a mat-list-item routerLink="searchreport" role="button" routerLinkActive="active">
-
-                <span class="label">SPRAWDZENIE</span>
+                <span class="label">START</span>
             </a>
 
+            <a role="button" mat-button>
+                <span class="label" [matMenuTriggerFor]="whiteList">BIAŁA LISTA VAT
+                    <mat-icon class="icon">arrow_drop_down</mat-icon></span>
+            </a>
+            <mat-menu #whiteList="matMenu">
+                <a routerLink="/searchreport" role="button" routerLinkActive="active" mat-list-item>
+                    <a mat-button>
+                        <mat-icon class="icon">format_list_bulleted</mat-icon>
+                        <span class="label">RAPORT SZCZEGÓŁOWY</span>
+                    </a>
+                </a>
+                <a routerLink="/checkreport" role="button" routerLinkActive="active" mat-list-item>
+                    <a mat-button>
+                        <mat-icon class="icon">list</mat-icon>
+                        <span class="label">WERYFIKACJA</span>
+                    </a>
+                </a>
+            </mat-menu>
+
+            <a role="button" mat-button>
+                <span class="label" [matMenuTriggerFor]="arch">ARCHIWUM
+                    <mat-icon class="icon">arrow_drop_down</mat-icon></span>
+            </a>
+            <mat-menu #arch="matMenu">
+                <a routerLink="/archsearchreports" role="button" routerLinkActive="active" mat-list-item><a
+                        mat-button>
+                        <mat-icon class="icon">format_list_bulleted</mat-icon>
+                        <span class="label">RAPORTY SZCZEGÓŁOWE</span>
+                    </a>
+                </a>
+                <a routerLink="/archcheckreports" role="button" routerLinkActive="active" mat-list-item><a
+                        mat-button>
+                        <mat-icon class="icon">format_list_bulleted</mat-icon>
+                        <span class="label">RAPORTY WERYFIKACJI</span>
+                    </a>
+                </a>
+                <a routerLink="/requests" role="button" routerLinkActive="active" mat-list-item><a
+                        mat-button>
+                        <mat-icon class="icon">list</mat-icon>
+                        <span class="label">ZAPYTANIA</span>
+                    </a>
+                </a>
+            </mat-menu>
+
+            <a mat-button routerLink="/logut" role="button" routerLinkActive="active">
+                <span class="label">WYLOGUJ <mat-icon class="icon">exit_to_app</mat-icon></span>
+            </a>
+            <br>
             <a mat-button target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/matiej/">
                 <mat-icon class="icon"><img src="/assets/linkedin-box.png" alt="whiteList" /></mat-icon>
             </a>
-
             <a mat-button target="_blank" rel="noopener noreferrer" href="https://github.com/Matiej">
                 <mat-icon class="icon"><img src="/assets/github-circle.png" alt="whiteList" /></mat-icon>
             </a>
