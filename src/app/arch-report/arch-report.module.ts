@@ -1,36 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ArchReportRoutingModule } from './arch-report.routing.module';
 import { SharedModule } from '../shared/shared.module';
-import {
-    ArchReportComponent,
-    ArchCheckReportComponent,
-    ArchCheckReportDetailsComponent,
-    ArchCheckReportListComponent,
-    ArchSearchReportComponent,
-    ArchSearchReportListComponent
-} from '.';
-
+import { ArchCheckReportComponent, ArchCheckReportDetailsComponent, ArchCheckReportListComponent, ArchReportComponent, ArchSearchReportComponent, ArchSearchReportListComponent } from '.';
+import { ArchCheckReportRoutingModule } from './arch-checkreport.routing.module';
+import { ArchSearchReportRoutingModule } from './arch-searchreport.routing.module';
 
 @NgModule({
     declarations: [
-        ArchReportComponent,
         ArchCheckReportComponent,
         ArchCheckReportDetailsComponent,
         ArchCheckReportListComponent,
+        ArchReportComponent
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        ArchCheckReportRoutingModule
+    ]
+})
+
+export class ArchCheckReportModule { }
+
+@NgModule({
+    declarations: [
         ArchSearchReportComponent,
         ArchSearchReportListComponent,
     ],
     imports: [
         CommonModule,
-        ArchReportRoutingModule,
-        SharedModule
-
+        SharedModule,
+        ArchSearchReportRoutingModule
     ]
 })
-
-export class ArchReportModule {
-
-
-
-}
+export class ArchSearchReportModule { }
