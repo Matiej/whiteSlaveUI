@@ -1,25 +1,33 @@
-import { GovSearchComponent } from './gov-report/gov-search/gov-search.component';
 import { Page404Component } from './page404/page404.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { GovCheckComponent } from './gov-report/gov-check/gov-check.component';
-import { ArchReportModule } from './arch-report/arch-report.module';
-import { GovReportModule } from './gov-report/gov-report.module';
-
 
 const routes: Routes = [
-
+  //lazy loading include - aby wylaczyc to trzebe importy porobic
   {
     path: '',
-    redirectTo: '/home',
-    pathMatch: 'full'
+    loadChildren: './home/home.module#HomeModule'
   },
 
   {
-    path: 'home',
-    component: HomeComponent
+    path: 'archcheckreports',
+    loadChildren: './arch-report/arch-report.module#ArchCheckReportModule'
   },
+
+  {
+    path: 'archsearchreports',
+    loadChildren: './arch-report/arch-report.module#ArchSearchReportModule'
+  },
+
+  {
+    path: 'searchreport',
+    loadChildren: './gov-report/gov-search/gov-search.module#GovSearchReportModule'
+  },
+  {
+    path: 'checkreport',
+    loadChildren: './gov-report/gov-check/gov-check.module#GovCheckReportModule'
+  },
+
   {
     path: '**',
     component: Page404Component
@@ -28,8 +36,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    ArchReportModule,
-    GovReportModule,
     RouterModule.forRoot(routes),
   ],
   exports: [RouterModule]
