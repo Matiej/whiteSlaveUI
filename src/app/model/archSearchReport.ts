@@ -5,11 +5,12 @@ export interface ArchSearchReport {
     name: string;
     statusVat:string;
     requestDate: string;
+    reportDate: String,
     requestNip: string;
     requestRegon: string;
     requestBankAccount: string;
     subjectNo: string;
     searchResult: string;
-    pdfFileName: string
+    // pdfFileName: string
 
 }

@@ -82,7 +82,7 @@
 
                 <mat-header-row *matHeaderRowDef="createDisplayedColumns()"></mat-header-row>
                 <mat-row appLineLight *matRowDef="let row; columns: createDisplayedColumns()" matRipple role="button"
-                    class="element-row" [routerLink]="[row.id]"></mat-row>
+                    class="element-row" [routerLink]="[row.requestId + '_' + row.id]" (click) = "sendDetails(row.id)"></mat-row>
             </mat-table>
             <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageIndex]="0" [pageSize]="10">
             </mat-paginator>

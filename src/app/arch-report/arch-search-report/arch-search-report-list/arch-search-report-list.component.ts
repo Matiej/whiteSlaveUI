@@ -42,11 +42,14 @@ export class ArchSearchReportListComponent implements OnInit, AfterViewInit {
     })
   }
 
+  //TODO -> może jest inny sposób aby dwa razy nie robić findAll
   ngAfterViewInit(): void {
+    
     this.archService.findAllArchiveSearchReports()
     .subscribe((archSearchReportList: Array<ArchSearchReport>) => {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.arachSearchReportList = archSearchReportList;
     })
   }
 
@@ -67,6 +70,10 @@ export class ArchSearchReportListComponent implements OnInit, AfterViewInit {
     filterValue = filterValue.trim();
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;
+  }
+
+  sendDetails(id: string) {
+    this.archService.findSyncSearchReportById(id);
   }
 
 }

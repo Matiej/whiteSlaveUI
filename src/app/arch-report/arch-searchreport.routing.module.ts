@@ -1,3 +1,4 @@
+import { ArchSearchReportDetailsComponent } from './arch-search-report/arch-search-report-details/arch-search-report-details.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import {
@@ -7,7 +8,13 @@ import {
 const searchRouting: Routes = [
     {
         path: '',
-        component: ArchSearchReportComponent
+        component: ArchSearchReportComponent,
+        children: [
+            {
+                path: ':requestId',
+                component: ArchSearchReportDetailsComponent
+            }
+        ]
     }
 ]
 @NgModule({
