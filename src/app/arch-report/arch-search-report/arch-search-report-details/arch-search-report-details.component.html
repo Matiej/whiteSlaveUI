@@ -1,6 +1,6 @@
-<div *ngIf = "null != archReportRequest" style="margin-left: 3%; margin-right: 3;" id="archCheckDetailsTable">
+<div *ngIf = "null != archReportRequest" style="margin-left: 3%; margin-right: 3;" id="archSearchDetailsTable">
     <div class="szadows">
-        <h3>DETALE RAPORTU WERYFIKACYJNEGO</h3>
+        <h3>DETALE RAPORTU SZCZEGÓŁOWEGO</h3>
         <p>Tutaj url nie moze byc /id z bazy danych. Trzeba to zmienic jakos</p>
         <p>Najlepiej requestID jak będzie linkiem lub coś stałego wtedy parametr jakoś będzie przekazywany do serwisu i strzał</p>
         <br>
@@ -46,6 +46,7 @@
                 <td class="tright">{{archReportRequest.requestBankAccount | emptyValue}}</td>
             </tr>
         </tbody>
-        <button routerLink="/archcheckreports">ZAMKNIJ</button>
+        <button routerLink="/archsearchreports">ZAMKNIJ</button>
     </table>
 </div>
+

@@ -73,6 +73,7 @@ export class ArchSearchReportListComponent implements OnInit, AfterViewInit {
   }
 
   sendDetails(id: string) {
+    this.archService.clearSearchReportDetails();
     this.archService.findSyncSearchReportById(id);
   }
 

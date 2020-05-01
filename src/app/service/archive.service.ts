@@ -56,7 +56,7 @@ export class ArchiveService {
 
     result.subscribe(searchReportDetails => {
       this.searchReportDetails$.next(searchReportDetails);
-   
+
     })
     return result;
   }
@@ -66,6 +66,11 @@ export class ArchiveService {
   }
 
   public getSearchReportDetails(): Observable<ArchSearchReportDetails> {
+    return this.searchReportDetails$.asObservable();
+  }
+
+  public clearSearchReportDetails(): Observable<ArchSearchReportDetails> {
+    this.searchReportDetails$.next(null);
     return this.searchReportDetails$.asObservable();
   }
 
