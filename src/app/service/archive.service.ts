@@ -1,3 +1,4 @@
+import { Params } from '@angular/router';
 import { ArchSearchReportDetailsComponent } from './../arch-report/arch-search-report/arch-search-report-details/arch-search-report-details.component';
 import { ArchCheckReportComponent } from './../arch-report/arch-check-report/arch-check-report.component';
 import { ArchSearchReport } from './../model/archSearchReport';
@@ -20,6 +21,7 @@ export class ArchiveService {
   private readonly ARCH_CHECK_REPORT_BYID: string = '/checkSyncReport';
   private readonly ARCH_SEARCH_REPORTS: string = '/searchSyncReports';
   private readonly ARCH_SEARCH_REPORT_BYID: string = '/searchSyncReport';
+  private readonly ARCH_PDF_FILE: string = '/pdfreport';
 
   private checkReportDetails$ = new BehaviorSubject<ArchCheckReport>(new ArchCheckReport());
   private searchReportDetails$ = new BehaviorSubject<ArchSearchReportDetails>(new ArchSearchReportDetails());
@@ -44,7 +46,6 @@ export class ArchiveService {
   }
 
   public findAllArchiveSearchReports(): Observable<Array<ArchSearchReport>> {
-    // this.findSyncSearchReportById('1');
     return this.http.get<Array<ArchSearchReport>>(this.WHITE_LIST_APP_ADDRESS + this.REPORT_QUERY_URI
       + this.ARCH_SEARCH_REPORTS);
   }
@@ -61,6 +62,15 @@ export class ArchiveService {
     return result;
   }
 
+  public downloadPdfReportFile(id: string): Observable<Blob> {
+    const idParam = new HttpParams()
+      .set('id', id);
+    const result = this.http.get(this.WHITE_LIST_APP_ADDRESS + this.REPORT_QUERY_URI + this.ARCH_PDF_FILE,
+      { params: idParam, responseType: 'blob' });
+
+    return result;
+  }
+
   public getCheckReportDetails(): Observable<ArchCheckReport> {
     return this.checkReportDetails$.asObservable();
   }
@@ -73,5 +83,7 @@ export class ArchiveService {
     this.searchReportDetails$.next(null);
     return this.searchReportDetails$.asObservable();
   }
+
+  
 
 }

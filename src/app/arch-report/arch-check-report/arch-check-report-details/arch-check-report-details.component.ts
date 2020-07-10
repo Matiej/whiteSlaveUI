@@ -21,6 +21,14 @@ export class ArchCheckReportDetailsComponent implements OnInit {
 
   }
 
+  public downloadFile(id: string): void {
+    const fileSource = this.archService.downloadPdfReportFile(id);
+    fileSource.subscribe(fs=> {
+      window.open(window.URL.createObjectURL(fs));
+    })
+
+  }
+
   
 
   

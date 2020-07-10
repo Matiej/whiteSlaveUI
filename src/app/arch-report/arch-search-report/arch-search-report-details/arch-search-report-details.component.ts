@@ -14,8 +14,15 @@ export class ArchSearchReportDetailsComponent implements OnInit {
   constructor(private archService: ArchiveService) { }
 
   ngOnInit() {
-    this.archService.getSearchReportDetails().subscribe(searchReportDetails=> {
+    this.archService.getSearchReportDetails().subscribe(searchReportDetails => {
       this.archReportRequest = searchReportDetails;
+    })
+  }
+
+  public downloadFile(id: string): void {
+    const fileSource = this.archService.downloadPdfReportFile(id);
+    fileSource.subscribe(fs => {
+      window.open(window.URL.createObjectURL(fs));
     })
   }
 

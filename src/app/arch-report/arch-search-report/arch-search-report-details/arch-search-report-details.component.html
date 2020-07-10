@@ -1,8 +1,9 @@
-<div *ngIf = "null != archReportRequest" style="margin-left: 3%; margin-right: 3;" id="archSearchDetailsTable">
+<div *ngIf="null != archReportRequest" style="margin-left: 3%; margin-right: 3;" id="archSearchDetailsTable">
     <div class="szadows">
         <h3>DETALE RAPORTU SZCZEGÓŁOWEGO</h3>
         <p>Tutaj url nie moze byc /id z bazy danych. Trzeba to zmienic jakos</p>
-        <p>Najlepiej requestID jak będzie linkiem lub coś stałego wtedy parametr jakoś będzie przekazywany do serwisu i strzał</p>
+        <p>Najlepiej requestID jak będzie linkiem lub coś stałego wtedy parametr jakoś będzie przekazywany do serwisu i
+            strzał</p>
         <br>
     </div>
 
@@ -23,7 +24,7 @@
             </tr>
             <tr>
                 <td class="tleft">Raport w pliku PDF</td>
-                <td><button>Pobierz PDF</button></td>
+                <td><button (click)='downloadFile(archReportRequest.syncRequestEntityId)'>Pobierz PDF</button></td>
             </tr>
             <tr>
                 <td class="tleft">Typ raportu</td>
@@ -49,4 +50,3 @@
         <button routerLink="/archsearchreports">ZAMKNIJ</button>
     </table>
 </div>
-
