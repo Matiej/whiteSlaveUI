@@ -19,7 +19,7 @@ export class ArchSearchReportDetails implements ArchSearchReport {
 
     reportType: string;
     pdfFileName: string;
-    requestEntityId: number;
+    syncRequestEntityId: number;
     representaivesDtoList: Array<RepresentativesDto>;
     authorizedClerksDtoList: Array<AuthorizedClerksDto>;
     partnersDtoList: Array<PartnersDto>;
