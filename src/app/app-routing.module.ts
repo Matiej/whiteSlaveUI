@@ -1,3 +1,4 @@
+import { UserComponent } from './user/user.component';
 import { Page404Component } from './page404/page404.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'checkreport',
     loadChildren: './gov-report/gov-check/gov-check.module#GovCheckReportModule'
+  },
+  {
+    path: 'login',
+    component: UserComponent
   },
 
   {
