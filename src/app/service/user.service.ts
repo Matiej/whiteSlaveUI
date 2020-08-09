@@ -15,8 +15,9 @@ export class UserService {
 
   private readonly WHITE_LIST_APP_ADDRESS: string = 'http://localhost:8080';
   private readonly USER_URI: string = '/user';
-  private readonly TEST: string = '/test'
-  private readonly CREATEUSER_URI: string = '/create'
+  private readonly TEST: string = '/test';
+  private readonly CREATEUSER_URI: string = '/create';
+  private readonly FIND_ALL_USERS_URI = '/findall';
 
   constructor(private http: HttpClient) {
 
@@ -39,10 +40,16 @@ export class UserService {
       + this.USER_URI
       + this.CREATEUSER_URI, createUser);
 
-console.log(result);
+    console.log(result);
 
     return result;
 
+  }
+
+  public findAllUsers(): Observable<Array<UserDto>> {
+    return this.http.get<Array<UserDto>>(this.WHITE_LIST_APP_ADDRESS
+      + this.USER_URI
+      + this.FIND_ALL_USERS_URI);
   }
 
 }

@@ -40,6 +40,7 @@ import { EmptyValuePipe } from './empty-value.pipe';
 import { ReportListPipe } from './report-list.pipe';
 import { VirtualAccountPipe } from './virtual-account.pipe';
 import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
+import { UserAccountPipe } from './user-account.pipe';
 
 @NgModule({
     declarations: [
@@ -49,6 +50,7 @@ import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
         EmptyValuePipe,
         ReportListPipe,
         VirtualAccountPipe,
+        UserAccountPipe,
     ],
     imports: [
         FormsModule,
@@ -61,6 +63,7 @@ import { BsDatepickerModule, AlertModule } from 'ngx-bootstrap';
         ReportTypeAndResultTranslPipe,
         EmptyValuePipe,
         ReportListPipe,
+        UserAccountPipe,
         VirtualAccountPipe,
         FormsModule,
         ReactiveFormsModule,

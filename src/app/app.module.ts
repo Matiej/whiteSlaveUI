@@ -18,6 +18,7 @@ import { Page404Component } from './page404/page404.component';
 import localePl from '@angular/common/locales/pl';
 import { SharedModule } from './shared/shared.module';
 import { RegisterFormComponent } from './user/register-form/register-form.component';
+import { UserListComponent } from './user/user-list/user-list.component';
 
 //lokalna krajowa data
 registerLocaleData(localePl);
@@ -27,7 +28,8 @@ registerLocaleData(localePl);
     AppComponent,
     Page404Component,
     UserComponent,
-    RegisterFormComponent
+    RegisterFormComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,

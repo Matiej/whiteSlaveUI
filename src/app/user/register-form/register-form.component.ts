@@ -47,9 +47,9 @@ export class RegisterFormComponent implements OnInit {
       matchingPassword: this.userFormular.value.inputMatchingPassword,
       email: this.userFormular.value.inputEmail,
       // authRoles: ['ADMIN'],
-      accountNonExpired: this.userFormular.value.inputaccountNonExpired,
-      accountNonLocked: this.userFormular.value. inputaccountNonLocked,
-      credentialsNonExpired: this.userFormular.value.credentialsNonExpired,
+      accountNonExpired: !this.userFormular.value.inputaccountNonExpired,
+      accountNonLocked: !this.userFormular.value. inputaccountNonLocked,
+      credentialsNonExpired: !this.userFormular.value.credentialsNonExpired,
       enabled: this.userFormular.value.enabled,
     };
     console.log(this.userFormular);

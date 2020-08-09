@@ -137,6 +137,26 @@
                             <span class="label">ZALOGUJ SIĘ</span>
                         </a>
                     </li>
+                    <li routerLinkActive="active">
+                        <a role="button" mat-button>
+                            <span class="label" [matMenuTriggerFor]="user">UŻYTKOWNICY
+                                <mat-icon class="icon">arrow_drop_down</mat-icon></span>
+                        </a>
+                        <mat-menu #user="matMenu">
+                            <a routerLink="/userformular" role="button" routerLinkActive="active" mat-list-item><a
+                                    mat-button>
+                                    <mat-icon class="icon">format_list_bulleted</mat-icon>
+                                    <span class="label">NOWY</span>
+                                </a>
+                            </a>
+                            <a routerLink="/userlist" role="button" routerLinkActive="active" mat-list-item><a
+                                    mat-button>
+                                    <mat-icon class="icon">format_list_bulleted</mat-icon>
+                                    <span class="label">LISTA</span>
+                                </a>
+                            </a>
+                        </mat-menu>
+                    </li>
                     <span class="menu-spacer-in"></span>
                     <li routerLink="active">
                         <a mat-button target="_blank" rel="noopener noreferrer"

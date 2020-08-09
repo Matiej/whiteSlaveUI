@@ -1,3 +1,5 @@
+import { UserListComponent } from './user/user-list/user-list.component';
+import { RegisterFormComponent } from './user/register-form/register-form.component';
 import { UserComponent } from './user/user.component';
 import { Page404Component } from './page404/page404.component';
 import { NgModule, Component } from '@angular/core';
@@ -30,7 +32,15 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: UserComponent
+    component: Page404Component
+  },
+  {
+    path: 'userformular',
+    component: RegisterFormComponent
+  },
+  {
+    path: 'userlist',
+    component: UserListComponent
   },
 
   {
