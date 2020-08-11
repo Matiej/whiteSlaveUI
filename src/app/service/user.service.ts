@@ -1,8 +1,8 @@
 import { UserDto } from './../model/userDto';
 import { CreateUserDto } from './../model/createUserDto';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json;charset=UTF-8' })
@@ -18,6 +18,9 @@ export class UserService {
   private readonly TEST: string = '/test';
   private readonly CREATEUSER_URI: string = '/create';
   private readonly FIND_ALL_USERS_URI = '/findall';
+  private readonly DELETE_USERS_URI = '/delete';
+
+  private userList$ = new BehaviorSubject<Array<UserDto>>([]);
 
   constructor(private http: HttpClient) {
 
@@ -32,10 +35,6 @@ export class UserService {
   }
 
   public createUser(createUser: CreateUserDto): Observable<UserDto> {
-    console.log('service st');
-
-    console.log(createUser);
-
     const result = this.http.post<UserDto>(this.WHITE_LIST_APP_ADDRESS
       + this.USER_URI
       + this.CREATEUSER_URI, createUser);
@@ -47,13 +46,25 @@ export class UserService {
   }
 
   public findAllUsers(): Observable<Array<UserDto>> {
-    return this.http.get<Array<UserDto>>(this.WHITE_LIST_APP_ADDRESS
+    const result = this.http.get<Array<UserDto>>(this.WHITE_LIST_APP_ADDRESS
       + this.USER_URI
       + this.FIND_ALL_USERS_URI);
+
+    result.subscribe((userDtoList: Array<UserDto>) => {
+      this.userList$.next(userDtoList);
+    })
+
+    return result;
+  }
+
+  public delete(id: string): Observable<UserDto> {
+    const idParam = new HttpParams().set('id', id);
+    return this.http.delete<UserDto>(this.WHITE_LIST_APP_ADDRESS
+      + this.USER_URI
+      + this.DELETE_USERS_URI, { params: idParam });
   }
 
 }
-
 
 export interface Greetings {
   id?: string;

@@ -74,6 +74,15 @@
                     </mat-cell>
                 </ng-container>
 
+                <ng-container matColumnDef="id">
+                    <mat-header-cell *matHeaderCellDef  mat-sort-heade>SKASUJ KONTO
+                    </mat-header-cell >
+                    <mat-cell *matCellDef="let row">
+                        <button type="button" class="btn btn-danger"  (click) ="deleteUser(row.id)"
+                        >SKASUJ</button>
+                    </mat-cell>
+                </ng-container>
+
 
                 <mat-header-row *matHeaderRowDef="createDisplayedColumns()"></mat-header-row>
                 <mat-row  *matRowDef="let row; columns: createDisplayedColumns()" class="element-row">

@@ -26,7 +26,9 @@ export class UserListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort, { static: true })
   sort: MatSort;
   dataSource: MatTableDataSource<UserDto>;
+
   userList: Array<UserDto> = [];
+  userDtoDeleted: UserDto;
 
   isExpansionDetailRow = (index, row) => row.hasOwnProperty("detailRow");
 
@@ -35,8 +37,6 @@ export class UserListComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.userService.findAllUsers()
       .subscribe((userList: Array<UserDto>) => {
-        console.log(userList.length);
-        console.log(userList);
         this.userList = userList;
         this.dataSource = new MatTableDataSource(this.userList);
       });
@@ -60,6 +60,7 @@ export class UserListComponent implements OnInit, AfterViewInit {
     displayedCol.push('accountNonLocked')
     displayedCol.push('credentialsNonExpired');
     displayedCol.push('enabled');
+    displayedCol.push('id');
     return displayedCol;
   }
 
@@ -69,5 +70,19 @@ export class UserListComponent implements OnInit, AfterViewInit {
     this.dataSource.filter = filterValue;
   }
 
+  deleteUser(id: string): void {
+    this.userService.delete(id).subscribe((deletedUser: UserDto) => {
+      this.userDtoDeleted = deletedUser;
+      this.getAllUsers();
+    });
 
+  }
+
+  private getAllUsers() {
+    this.userService.findAllUsers()
+      .subscribe((userList: Array<UserDto>) => {
+        this.userList = userList;
+        this.dataSource = new MatTableDataSource(this.userList);
+      });
+  }
 }
