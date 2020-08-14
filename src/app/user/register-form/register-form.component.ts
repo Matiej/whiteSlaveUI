@@ -23,42 +23,37 @@ export class RegisterFormComponent implements OnInit {
 
   private initForm(): void {
     this.userFormular = new FormGroup({
-    inputUserName: new FormControl(null, Validators.required),
-    inputUserLogin: new FormControl(null, Validators.required),
-    inputPassword: new FormControl(null, Validators.required),
-    inputMatchingPassword: new FormControl(null, Validators.required),
-    inputEmail: new FormControl(null, Validators.required),
-    inputaccountNonExpired: new FormControl(false),
-    inputaccountNonLocked: new FormControl(false),
-    credentialsNonExpired: new FormControl(false),
-    enabled: new FormControl(true),
+      inputUserName: new FormControl(null, Validators.required),
+      inputUserLogin: new FormControl(null, Validators.required),
+      inputPassword: new FormControl(null, Validators.required),
+      inputMatchingPassword: new FormControl(null, Validators.required),
+      inputEmail: new FormControl(null, Validators.required),
+      inputaccountNonExpired: new FormControl(false),
+      inputaccountNonLocked: new FormControl(false),
+      credentialsNonExpired: new FormControl(false),
+      enabled: new FormControl(true),
 
-  });
-}
+    });
+  }
 
   submitUserForm(): void {
-    const inputUserName = this.userFormular.value.inputUserName;
- 
 
     const createUserDto: CreateUserDto = {
       username: this.userFormular.value.inputUserName,
       login: this.userFormular.value.inputUserLogin,
-      password:this.userFormular.value.inputPassword,
+      password: this.userFormular.value.inputPassword,
       matchingPassword: this.userFormular.value.inputMatchingPassword,
       email: this.userFormular.value.inputEmail,
       // authRoles: ['ADMIN'],
       accountNonExpired: !this.userFormular.value.inputaccountNonExpired,
-      accountNonLocked: !this.userFormular.value. inputaccountNonLocked,
+      accountNonLocked: !this.userFormular.value.inputaccountNonLocked,
       credentialsNonExpired: !this.userFormular.value.credentialsNonExpired,
       enabled: this.userFormular.value.enabled,
     };
-    console.log(this.userFormular);
-    console.log('inputUsername-> ' + inputUserName);
-    this.userService.createUser(createUserDto).subscribe((create: UserDto)=>{
-      console.log(
-      'subskirber'
-      )
-      console.log(create);
+
+    this.userService.createUser(createUserDto).subscribe((createdUser: UserDto) => {
+      window.alert('User with login: ' + createdUser.login + ' created successfully');
+
     });
   }
 

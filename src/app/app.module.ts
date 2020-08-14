@@ -19,6 +19,9 @@ import localePl from '@angular/common/locales/pl';
 import { SharedModule } from './shared/shared.module';
 import { RegisterFormComponent } from './user/register-form/register-form.component';
 import { UserListComponent } from './user/user-list/user-list.component';
+import { HttpErrorExceptionInterceptor } from './interceptor/HttpErrorExceptionInterceptor';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { ErrorDialogService } from './service/errordialog.service';
 
 //lokalna krajowa data
 registerLocaleData(localePl);
@@ -29,7 +32,8 @@ registerLocaleData(localePl);
     Page404Component,
     UserComponent,
     RegisterFormComponent,
-    UserListComponent
+    UserListComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -52,8 +56,12 @@ registerLocaleData(localePl);
     CheckService,
     DatePipe,
     { provide: LOCALE_ID, useValue: 'pl-PL' },  // to jest ta data wlasnie co wyzej  aby PL bylo. Chyba
-    UserService
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorExceptionInterceptor, multi: true},
+    UserService,
+    ErrorDialogService
+    
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ErrorDialogComponent]
 })
 export class AppModule { }

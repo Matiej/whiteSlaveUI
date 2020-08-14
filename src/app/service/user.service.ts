@@ -39,8 +39,6 @@ export class UserService {
       + this.USER_URI
       + this.CREATEUSER_URI, createUser);
 
-    console.log(result);
-
     return result;
 
   }
