@@ -1,3 +1,5 @@
+import { AuthService } from './service/auth.service';
+import { AuthModule } from './auth/auth.module';
 import { UserService } from './service/user.service';
 import { UserComponent } from './user/user.component';
 import { GovSearchReportRoutingModule } from './gov-report/gov-search/gov-serach.routing.module';
@@ -22,6 +24,7 @@ import { UserListComponent } from './user/user-list/user-list.component';
 import { HttpErrorExceptionInterceptor } from './interceptor/HttpErrorExceptionInterceptor';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { ErrorDialogService } from './service/errordialog.service';
+import { AuthGuardService } from './service/authguard.service';
 
 //lokalna krajowa data
 registerLocaleData(localePl);
@@ -33,7 +36,8 @@ registerLocaleData(localePl);
     UserComponent,
     RegisterFormComponent,
     UserListComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    // AuthComponent 
   ],
   imports: [
     BrowserModule,
@@ -44,6 +48,9 @@ registerLocaleData(localePl);
     FlexLayoutModule,
     MatIconModule,
     SharedModule,
+
+    // AuthModule,
+    // AuthRoutingModule,
   ],
   exports: [
     BrowserAnimationsModule,
@@ -56,10 +63,11 @@ registerLocaleData(localePl);
     CheckService,
     DatePipe,
     { provide: LOCALE_ID, useValue: 'pl-PL' },  // to jest ta data wlasnie co wyzej  aby PL bylo. Chyba
-    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorExceptionInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorExceptionInterceptor, multi: true },
     UserService,
-    ErrorDialogService
-    
+    ErrorDialogService,
+    AuthService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent],
   entryComponents: [ErrorDialogComponent]

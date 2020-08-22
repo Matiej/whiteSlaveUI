@@ -1,0 +1,42 @@
+<div style="text-align: center;">
+    <h2>ZALOGUJ SIĘ</h2>
+    <br>
+
+    <div class="container">
+        <form [formGroup]="loginFormular" (ngSubmit)="submitLoginForm()">
+            <div class="form-row">
+    
+                <div id="inputUserLogin" class="form-group col-md-6 mb-3 pb-3 input-group-lg">
+                    <div class="form-check-inline">
+                        <label for="inputUserLogin" class="form-check-label">Login</label>
+                    </div>
+                    <input type="text" class="form-control" id="inputUserLogin" name="inputUserLogin"
+                        formControlName="inputUserLogin" autocomplete="off" [placeholder]="inputLoginPlaceHolder">
+                </div>
+                <div id="inputUserName" class="form-group col-md-6 mb-3 pb-3 input-group-lg">
+                    <div class="form-check-inline">
+                        <label for="inputPassword" class="form-check-label">Hasło</label>
+                    </div>
+                    <input type="password" class="form-control" id="inputPassword" name="inputPassword"
+                        formControlName="inputPassword" autocomplete="off" [placeholder]="inputPasswordPlaceHolder">
+                </div>
+               
+            </div>
+            <div style="text-align: center;">
+                <button type="submit" class="my-wide-btn" mat-raised-button 
+                    [disabled]="loginFormular.invalid">ZALOGUJ</button>
+            </div>
+        </form>
+    </div>
+<!-- 
+    <div class="container">
+        <div>
+            User Name : <input type="text" name="username" [(ngModel)]="username">
+            Password : <input type="password" name="password" [(ngModel)]="password">
+        </div>
+        <br>
+        <button (click)=checkLogin() class="btn btn-success">
+            Login
+        </button>
+    </div> -->
+</div>

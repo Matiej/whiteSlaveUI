@@ -25,34 +25,55 @@
                 </a>
             </mat-menu>
 
-            <a role="button" mat-button>
+            <a *ngIf="isUserLogedIn()" role="button" mat-button>
                 <span class="label" [matMenuTriggerFor]="arch">ARCHIWUM
                     <mat-icon class="icon">arrow_drop_down</mat-icon></span>
             </a>
             <mat-menu #arch="matMenu">
-                <a routerLink="/archsearchreports" role="button" routerLinkActive="active" mat-list-item><a
-                        mat-button>
+                <a routerLink="/archsearchreports" role="button" routerLinkActive="active" mat-list-item><a mat-button>
                         <mat-icon class="icon">format_list_bulleted</mat-icon>
                         <span class="label">RAPORTY SZCZEGÓŁOWE</span>
                     </a>
                 </a>
-                <a routerLink="/archcheckreports" role="button" routerLinkActive="active" mat-list-item><a
-                        mat-button>
+                <a routerLink="/archcheckreports" role="button" routerLinkActive="active" mat-list-item><a mat-button>
                         <mat-icon class="icon">format_list_bulleted</mat-icon>
                         <span class="label">RAPORTY WERYFIKACJI</span>
                     </a>
                 </a>
-                <a routerLink="/requests" role="button" routerLinkActive="active" mat-list-item><a
-                        mat-button>
+                <a routerLink="/requests" role="button" routerLinkActive="active" mat-list-item><a mat-button>
                         <mat-icon class="icon">list</mat-icon>
                         <span class="label">ZAPYTANIA</span>
                     </a>
                 </a>
             </mat-menu>
 
-            <a mat-button routerLink="/login" role="button" routerLinkActive="active">
-                <span class="label">ZALOGU SIĘ <mat-icon class="icon">exit_to_app</mat-icon></span>
+               
+            <a *ngIf="isUserLogedIn()" role="button" mat-button>
+                <span class="label" [matMenuTriggerFor]="userMenu">UŻYTKOWNICY
+                    <mat-icon class="icon">arrow_drop_down</mat-icon></span>
             </a>
+            <mat-menu #userMenu="matMenu">
+                <a routerLink="/userformular" role="button" routerLinkActive="active" mat-list-item>
+                    <a mat-button>
+                        <mat-icon class="icon">format_list_bulleted</mat-icon>
+                        <span class="label">NOWY</span>
+                    </a>
+                </a>
+                <a routerLink="/userList" role="button" routerLinkActive="active" mat-list-item>
+                    <a mat-button>
+                        <mat-icon class="icon">list</mat-icon>
+                        <span class="label">LISTA</span>
+                    </a>
+                </a>
+            </mat-menu>
+
+            <a *ngIf="!isUserLogedIn()" mat-button routerLink="/auth/login" role="button" routerLinkActive="active">
+                <span class="label">ZALOGU SIĘ <mat-icon class="icon">login</mat-icon></span>
+            </a>
+            <a *ngIf="isUserLogedIn()" mat-button routerLink="/auth/logout" role="button" routerLinkActive="active">
+                <span class="label">WYLOGUJ SIĘ <mat-icon class="icon">exit_to_app</mat-icon></span>
+            </a>
+
             <br>
             <a mat-button target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/matiej/">
                 <mat-icon class="icon"><img src="/assets/linkedin-box.png" alt="whiteList" /></mat-icon>
@@ -105,7 +126,7 @@
                         </mat-menu>
                     </li>
 
-                    <li routerLinkActive="active">
+                    <li *ngIf="isUserLogedIn()" routerLinkActive="active">
                         <a role="button" mat-button>
                             <span class="label" [matMenuTriggerFor]="arch">ARCHIWUM
                                 <mat-icon class="icon">arrow_drop_down</mat-icon></span>
@@ -131,13 +152,8 @@
                             </a>
                         </mat-menu>
                     </li>
-                    <li>
-                        <a routerLink="/login" role="button" routerLinkActive="active" mat-button>
 
-                            <span class="label">ZALOGUJ SIĘ</span>
-                        </a>
-                    </li>
-                    <li routerLinkActive="active">
+                    <li *ngIf="isUserLogedIn()" routerLinkActive="active">
                         <a role="button" mat-button>
                             <span class="label" [matMenuTriggerFor]="user">UŻYTKOWNICY
                                 <mat-icon class="icon">arrow_drop_down</mat-icon></span>
@@ -157,6 +173,20 @@
                             </a>
                         </mat-menu>
                     </li>
+
+                    <li>
+                        <a *ngIf="!isUserLogedIn()" routerLink="/auth/login" role="button" routerLinkActive="active" mat-button>
+
+                            <span class="label">ZALOGUJ SIĘ</span>
+                        </a>
+                    </li>
+                    <li *ngIf="isUserLogedIn()">
+                        <a routerLink="/auth/logout" role="button" routerLinkActive="active" mat-button>
+
+                            <span class="label">WYLOGUJ SIĘ</span>
+                        </a>
+                    </li>
+                 
                     <span class="menu-spacer-in"></span>
                     <li routerLink="active">
                         <a mat-button target="_blank" rel="noopener noreferrer"

@@ -1,3 +1,4 @@
+import { AuthGuardService } from './service/authguard.service';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { RegisterFormComponent } from './user/register-form/register-form.component';
 import { UserComponent } from './user/user.component';
@@ -14,12 +15,14 @@ const routes: Routes = [
 
   {
     path: 'archcheckreports',
-    loadChildren: './arch-report/arch-report.module#ArchCheckReportModule'
+    loadChildren: './arch-report/arch-report.module#ArchCheckReportModule',
+    canActivate: [AuthGuardService]
   },
 
   {
     path: 'archsearchreports',
-    loadChildren: './arch-report/arch-report.module#ArchSearchReportModule'
+    loadChildren: './arch-report/arch-report.module#ArchSearchReportModule',
+    canActivate: [AuthGuardService]
   },
 
   {
@@ -31,16 +34,22 @@ const routes: Routes = [
     loadChildren: './gov-report/gov-check/gov-check.module#GovCheckReportModule'
   },
   {
-    path: 'login',
-    component: Page404Component
+    path: 'auth',
+    loadChildren: './auth//auth.module#AuthModule'
   },
+  // {
+  //   path: 'login',
+  //   component: Page404Component
+  // },
   {
     path: 'userformular',
-    component: RegisterFormComponent
+    component: RegisterFormComponent,
+    canActivate: [AuthGuardService]
   },
   {
     path: 'userlist',
-    component: UserListComponent
+    component: UserListComponent,
+    canActivate: [AuthGuardService]
   },
 
   {

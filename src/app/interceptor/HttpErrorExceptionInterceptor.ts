@@ -19,9 +19,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 
 import { retry, catchError, map } from 'rxjs/operators';
-import { request } from 'http';
 import { ErrorDialogService } from '../service/errordialog.service';
-import { UserService } from '../service/user.service';
 
 @Injectable()
 export class HttpErrorExceptionInterceptor implements HttpInterceptor {

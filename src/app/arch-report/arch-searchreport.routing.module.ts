@@ -4,11 +4,13 @@ import { NgModule } from '@angular/core';
 import {
     ArchSearchReportComponent
 } from '.';
+import { AuthGuardService } from '../service/authguard.service';
 
 const searchRouting: Routes = [
     {
         path: '',
         component: ArchSearchReportComponent,
+        canActivateChild: [AuthGuardService],
         children: [
             {
                 path: ':requestId',

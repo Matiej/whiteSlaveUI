@@ -1,3 +1,4 @@
+import { AuthGuardService } from './../service/authguard.service';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ArchCheckReportComponent, ArchCheckReportDetailsComponent } from '.';
@@ -7,6 +8,7 @@ export const checkRouting: Routes = [
         // path: 'archcheckreports',
         path: '',
         component: ArchCheckReportComponent,
+        canActivateChild: [AuthGuardService],
         children: [
             {
                 path: ':requestId',
